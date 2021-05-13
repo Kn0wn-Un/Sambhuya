@@ -1,6 +1,8 @@
 const User = require('../models/user');
 const passwordValidator = require('password-validator');
 const { body, validationResult } = require('express-validator');
+const passport = require('passport');
+
 var schema = new passwordValidator();
 schema
 	.is()
@@ -18,12 +20,41 @@ schema
 	.spaces();
 
 exports.userLoginGet = (req, res, err) => {
-	res.render('user_login', { title: 'login' });
+	res.render('user_login', { title: 'Login' });
 };
 
-exports.userLoginPost = (req, res, err) => {
-	res.render('/index');
-};
+exports.userLoginPost = [
+	// Validate and sanitize fields.
+	body('email')
+		.trim()
+		.isLength({ min: 1 })
+		.escape()
+		.withMessage('Email must be specified.')
+		.isEmail()
+		.withMessage('Email must be proper.'),
+	(req, res, next) => {
+		// Extract the validation errors from a request.
+		const errors = validationResult(req);
+		const validatePass = schema.validate(req.body.password);
+		if (!errors.isEmpty()) {
+			// There are errors. Render form again with sanitized values/errors messages.
+			res.render('user_login', {
+				title: 'Login',
+				errors: errors.array(),
+			});
+			return;
+		}
+		if (!validatePass) {
+			// There are password errors. Render form again with sanitized values/errors messages.
+			res.render('user_login', {
+				title: 'Login',
+				passError: 'Password Error',
+			});
+			return;
+		}
+		next();
+	},
+];
 
 exports.userSignupGet = (req, res, err) => {
 	res.render('user_signup', { title: 'Sign Up', name: req.body.name });

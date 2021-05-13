@@ -2,18 +2,19 @@ extends layout
 block content 
     h1 Login 
     form(method='POST' action='')
-        div
-            label(for='name') Name:
-            br
-            input#name(type='text' placeholder='Name' name='name' required='true')
+        label(for='email') Email:
+        br
+        input#email(type='email' placeholder='' name='email' required='true')
         br
         br
-        div
-            label(for='password') Password:
-            br
-            input#password(type='text' name='password')
+        label(for='password') Password:
+        br
+        input#password(type='password' name='password' required='true')
         button.btn.btn-primary(type='submit') Login
     if errors
         ul
         for error in errors
             li!= error.msg
+    if passError
+        ul
+            li= passError
