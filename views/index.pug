@@ -1,7 +1,9 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  if userid
-    div= userid 
+    h1= title
+    p Welcome to #{title}
+    if userid
+        div= userid 
+    if name 
+        h3 Welcome back, #{name}
