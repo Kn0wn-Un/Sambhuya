@@ -1,0 +1,36 @@
+extends layout 
+block content 
+    h1 New Post
+    form(method='POST' action='')
+        label(for='phone') Phone Number:
+        br
+        input#phone(type='tel' name='phone' minlength=10 maxlength=10 required='true')
+        br
+        br
+        label(for='location') Location:
+        br
+        select#location(name='location' required='true')
+            for location in locations   
+                option(value=location)=location
+        br
+        br
+        label(for='helptype') Location:
+        br
+        select#helptype(name='helptype' required='true')
+            for help in helpType   
+                option(value=help)=help
+        br
+        br
+        label(for='description') Description:
+        br
+        textarea#description(name="description", cols="30", rows="10" placeholder='provide details here..' maxlength=10)
+        br
+        br
+        button.btn.btn-primary(type='submit') Post
+    if errors
+        ul
+        for error in errors
+            li!= error.msg
+    if passError
+        ul
+            li= passError

@@ -6,7 +6,6 @@ var UserSchema = new Schema({
 	phone: { type: Number, required: true, min: 10 },
 	email: { type: String, required: true },
 	password: { type: String, required: true },
-	posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
 });
 
 UserSchema.virtual('url').get(function () {

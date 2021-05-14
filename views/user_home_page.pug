@@ -2,11 +2,14 @@ extends layout
 
 block content
     h1 Hello, #{currentUser.name}
+    a(href='/post/new-post')
+        h3 New Post
     a(href='/') Back to home 
     br
     | or 
     br
     a(href='/logout') Logout
+    if posts
     ul
-    for post in currentUser.posts
-        li= post.phone
+    for post in posts
+        li= post.description
