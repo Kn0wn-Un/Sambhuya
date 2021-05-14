@@ -2,6 +2,7 @@ const User = require('../models/user');
 const passwordValidator = require('password-validator');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const async = require('async');
 
 var schema = new passwordValidator();
 schema
@@ -103,24 +104,54 @@ exports.userSignupPost = [
 			});
 			return;
 		}
-		// Data from form is valid.
-		//Encrypt Password
-		bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-			if (err) return next(err);
-			//Create an User object with escaped and trimmed data.
-			var user = new User({
-				name: req.body.name,
-				phone: req.body.phone,
-				email: req.body.email,
-				password: hashedPassword,
-			});
-			user.save(function (err) {
-				if (err) {
-					return next(err);
+		async.parallel(
+			{
+				email: function (callback) {
+					User.findOne({ email: req.body.email }).exec(callback);
+				},
+				phone: function (callback) {
+					User.findOne({ phone: req.body.phone }).exec(callback);
+				},
+			},
+			//check if email or phone already exists
+			function (err, results) {
+				if (err) return next(err);
+				if (results.email !== null)
+					return res.render('user_signup', {
+						title: 'Sign Up',
+						passError: 'Email already exists',
+					});
+				else if (results.phone !== null)
+					return res.render('user_signup', {
+						title: 'Sign Up',
+						passError: 'Phone number already exists',
+					});
+				else {
+					// Data from form is valid.
+					//Encrypt Password
+					bcrypt.hash(
+						req.body.password,
+						10,
+						(err, hashedPassword) => {
+							if (err) return next(err);
+							//Create an User object with escaped and trimmed data.
+							var user = new User({
+								name: req.body.name,
+								phone: req.body.phone,
+								email: req.body.email,
+								password: hashedPassword,
+							});
+							user.save(function (err) {
+								if (err) {
+									return next(err);
+								}
+								res.redirect('/login');
+							});
+						}
+					);
 				}
-				res.redirect('/login');
-			});
-		});
+			}
+		);
 	},
 ];
 
