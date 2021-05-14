@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const passwordValidator = require('password-validator');
 const { body, validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
 
 var schema = new passwordValidator();
 schema
@@ -103,20 +104,22 @@ exports.userSignupPost = [
 			return;
 		}
 		// Data from form is valid.
-
-		// Create an User object with escaped and trimmed data.
-		var user = new User({
-			name: req.body.name,
-			phone: req.body.phone,
-			email: req.body.email,
-			password: req.body.password,
-		});
-		user.save(function (err) {
-			if (err) {
-				return next(err);
-			}
-			// Successful - redirect to new author record.
-			res.redirect(user.url);
+		//Encrypt Password
+		bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+			if (err) return next(err);
+			//Create an User object with escaped and trimmed data.
+			var user = new User({
+				name: req.body.name,
+				phone: req.body.phone,
+				email: req.body.email,
+				password: hashedPassword,
+			});
+			user.save(function (err) {
+				if (err) {
+					return next(err);
+				}
+				res.redirect('/login');
+			});
 		});
 	},
 ];
