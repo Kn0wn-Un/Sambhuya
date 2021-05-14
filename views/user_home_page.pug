@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1 Hello, #{currentUser.name}
+    a(href='/') Back to home 
+    br
+    | or 
+    br
+    a(href='/logout') Logout
+    ul
+    for post in currentUser.posts
+        li= post.phone

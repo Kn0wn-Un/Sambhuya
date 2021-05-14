@@ -3,7 +3,11 @@ extends layout
 block content
     h1= title
     p Welcome to #{title}
+    if !userid
+        a(href='/login') Login 
+        | or 
+        a(href='/sign-up') Sign Up 
     if userid
         div= userid 
-    if user 
-        h3 Welcome back, #{user.name}
+    if currentUser 
+        h3 Welcome back, #{currentUser.name}

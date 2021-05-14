@@ -9,8 +9,6 @@ const LocalStrategy = require('passport-local').Strategy;
 var User = require('./models/user');
 require('dotenv').config();
 
-const userController = require('./controllers/userController');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var aboutRouter = require('./routes/about');
@@ -71,40 +69,10 @@ app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
-
-//app.get('/login', userController.userLoginGet);
-//app.post(
-//	'/login',
-//	function (req, res, next) {
-//		// call passport authentication passing the "local" strategy name and a callback function
-//		passport.authenticate('local', function (error, user, info) {
-//			// this will execute in any case, even if a passport strategy will find an error
-//			// log everything to console
-//			console.log(error);
-//			console.log(user);
-//			console.log(info);
-//
-//			if (error) {
-//				res.status(401).send(error);
-//			} else if (!user) {
-//				res.status(401).send(info);
-//			} else {
-//				next();
-//			}
-//
-//			res.status(401).send(info);
-//		})(req, res);
-//	},
-//
-//	// function to call once successfully authenticated
-//	function (req, res) {
-//		res.status(200).send('logged in!');
-//	}
-//	//passport.authenticate('local', {
-//	//	successRedirect: '/',
-//	//	failureRedirect: '/login',
-//	//})
-//);
+app.use(function (req, res, next) {
+	res.locals.currentUser = req.user;
+	next();
+});
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);

@@ -5,7 +5,7 @@ const passport = require('passport');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-	res.render('index', { title: 'Home', user: req.user });
+	res.render('index', { title: 'Home' });
 });
 
 router.get('/login', userController.userLoginGet);
@@ -14,10 +14,12 @@ router.post(
 	'/login',
 	userController.userLoginPost,
 	passport.authenticate('local', {
-		successRedirect: '/',
+		successRedirect: '/user',
 		failureRedirect: '/login',
 	})
 );
+
+router.get('/logout', userController.userLogout);
 
 router.get('/sign-up', userController.userSignupGet);
 

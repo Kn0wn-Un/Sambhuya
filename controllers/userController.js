@@ -1,7 +1,6 @@
 const User = require('../models/user');
 const passwordValidator = require('password-validator');
 const { body, validationResult } = require('express-validator');
-const passport = require('passport');
 
 var schema = new passwordValidator();
 schema
@@ -121,3 +120,8 @@ exports.userSignupPost = [
 		});
 	},
 ];
+
+exports.userLogout = (req, res) => {
+	req.logout();
+	res.redirect('/');
+};
