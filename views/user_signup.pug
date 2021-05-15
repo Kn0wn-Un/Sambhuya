@@ -1,20 +1,23 @@
 extends layout 
 block content 
-    h1 Sign Up 
+    h1 User Form
     form(method='POST' action='')
         label(for='name') Name:
         br
-        input#name(type='text' placeholder='Name' name='name' required='true' max=50)
+        input#name(type='text' placeholder='Name' name='name' required='true' max=50
+            value=user?user.name:'')
         br
         br
         label(for='phone') Phone Number:
         br
-        input#phone(type='tel' name='phone' minlength=10 maxlength=10 required='true')
+        input#phone(type='tel' name='phone' minlength=10 maxlength=10 required='true'
+            value=user?user.phone:'')
         br
         br
         label(for='email') Email:
         br
-        input#email(type='email' placeholder='xyz@mail.com' name='email' required='true')
+        input#email(type='email' placeholder='xyz@mail.com' name='email' required='true'
+            value=user?user.email:'')
         br
         br
         label(for='password') Password:
@@ -22,7 +25,10 @@ block content
         input#password(type='password' name='password' required='true')
         br
         br
-        button.btn.btn-primary(type='submit') Sign Up
+        if !user
+            button.btn.btn-primary(type='submit') Sign Up
+        else
+            button.btn.btn-primary(type='submit') Save Edits
     if errors
         ul
         for error in errors
