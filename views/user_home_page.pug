@@ -1,14 +1,27 @@
 extends layout
 
 block content
-    h1 Hello, #{currentUser.name}
-    a(href='/post/new-post')
-        h3 New Post
+    if currentUser
+        -if(String(currentUser._id) === String(user._id))
+            h1 Hello, #{currentUser.name}
+            a(href='/post/new-post')
+                h3 New Post
+            | or 
+            br
+            a(href='/logout') Logout
+        -else 
+            h1 User, #{user.name}
+            h2 More Details:
+            h3 Phone: #{user.phone}
+            h3 Email: #{user.email}
+    else 
+        h1 User, #{user.name}
+        h2 More Details:
+        h3 Phone: #{user.phone}
+        h3 Email: #{user.email}
+    br
+    br
     a(href='/') Back to home 
-    br
-    | or 
-    br
-    a(href='/logout') Logout
     if posts
     ul
     for post in posts
