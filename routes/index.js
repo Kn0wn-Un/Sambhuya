@@ -7,6 +7,8 @@ const passport = require('passport');
 /* GET home page. */
 router.get('/', indexController.homeGet);
 
+router.post('/', indexController.homePost);
+
 router.get('/login', userController.userLoginGet);
 
 router.post(

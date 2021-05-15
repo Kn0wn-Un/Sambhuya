@@ -8,8 +8,23 @@ block content
         | or 
         a(href='/sign-up') Sign Up 
     if currentUser 
-        h3 Welcome back, #{currentUser.name}
+        h3 Hello, #{currentUser.name}!
     if posts
+        form(method="POST" action="") 
+            h3 Filters:
+            select#location(name='location')
+                option(value='') All
+                for location in locations   
+                    option(value=location.cityName
+                    selected=(selLoc ? (selLoc === location.cityName ? true : false) : false)
+                    )=location.cityName 
+            select#helptype(name='helptype')
+                option(value='') All
+                for help in helpType   
+                    option(value=help.type
+                    selected=(selHelp ? (selHelp === help.type ? true : false) : false)
+                    )=help.type
+            button(type='submit') Filter
         h3 Posts:
         ol  
             for post in posts 
