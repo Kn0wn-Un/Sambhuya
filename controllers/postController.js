@@ -200,3 +200,11 @@ exports.postFormEditPost = [
 		});
 	},
 ];
+
+exports.postDelete = (req, res, next) => {
+	if (!req.user) return res.redirect('/');
+	Post.findByIdAndRemove(req.params.postId).exec((err, del) => {
+		if (err) return next(err);
+		else res.redirect('/user');
+	});
+};
