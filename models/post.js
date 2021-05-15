@@ -15,4 +15,8 @@ PostSchema.virtual('url').get(function () {
 	return '/post/display-post/' + this._id;
 });
 
+PostSchema.virtual('name').get(function () {
+	return this.helpType + ' in ' + this.location;
+});
+
 module.exports = mongoose.model('Post', PostSchema);

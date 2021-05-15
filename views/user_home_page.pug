@@ -5,22 +5,20 @@ block content
         -if(String(currentUser._id) === String(user._id))
             h1 Hello, #{currentUser.name}
             a(href='/post/new-post')
-                h3 New Post
-            | or 
-            br
-            a(href='/logout') Logout
+                h3 Create new Post
+            a(href='/logout')
+                h3 Logout
         -else 
             h1 User, #{user.name}
     else 
         h1 User, #{user.name}
-    h2 More Details:
-    h3 Phone: #{user.phone}
-    h3 Email: #{user.email}
+    h3 More Details:
+    div Phone: #{user.phone}
+    div Email: #{user.email}
     br
-    br
-    a(href='/') Back to home 
     if posts
-    ul
-    for post in posts
-        li
-            a(href=post.url)= post.description
+        h3 Posts:
+        ol
+            for post in posts
+                li
+                    a(href=post.url)= post.name
