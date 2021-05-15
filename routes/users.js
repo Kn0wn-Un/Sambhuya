@@ -2,23 +2,10 @@ var express = require('express');
 var router = express.Router();
 const Post = require('../models/post');
 const user = require('../models/user');
+const userController = require('../controllers/userController');
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-	if (req.user) res.redirect('/user/' + req.user._id);
-	else res.redirect('/');
+	req.user ? res.redirect('/user/' + req.user._id) : res.redirect('/');
 });
-router.get('/:userId', function (req, res, next) {
-	Post.find({ user: req.params.userId })
-		.populate('user')
-		.sort({ date: 1 })
-		.exec((err, posts) => {
-			if (err) return next(err);
-			var user = posts[0].user;
-			res.render('user_home_page', {
-				title: 'User Page:' + user.name,
-				posts: posts,
-				user: user,
-			});
-		});
-});
+router.get('/:userId', userController.userHomePageGet);
 module.exports = router;

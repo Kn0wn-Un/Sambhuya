@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Post = require('../models/post');
 const passwordValidator = require('password-validator');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
@@ -158,4 +159,19 @@ exports.userSignupPost = [
 exports.userLogout = (req, res) => {
 	req.logout();
 	res.redirect('/');
+};
+
+exports.userHomePageGet = (req, res, next) => {
+	Post.find({ user: req.params.userId })
+		.populate('user')
+		.sort({ date: 1 })
+		.exec((err, posts) => {
+			if (err) return next(err);
+			var user = posts[0].user;
+			res.render('user_home_page', {
+				title: 'User Page:' + user.name,
+				posts: posts,
+				user: user,
+			});
+		});
 };

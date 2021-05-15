@@ -4,10 +4,6 @@ const postController = require('../controllers/postController');
 /* GET users listing. */
 router.get('/display-post/:postId', postController.postGet);
 
-router.get('/', (req, res, err) => {
-	res.send('hello');
-});
-
 router.get('/new-post', postController.postFormGet);
 
 router.post('/new-post', postController.postFormPost);
