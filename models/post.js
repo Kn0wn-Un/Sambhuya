@@ -8,11 +8,11 @@ var PostSchema = new Schema({
 	helpType: { type: String, ref: 'HelpType', required: true },
 	posted: { type: Date, default: Date.now() },
 	description: { type: String, maxlength: 250 },
-	userId: { type: Schema.Types.ObjectId, ref: 'User' },
+	user: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 PostSchema.virtual('url').get(function () {
-	return '/post/' + this._id;
+	return '/post/display-post/' + this._id;
 });
 
 module.exports = mongoose.model('Post', PostSchema);

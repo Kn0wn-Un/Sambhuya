@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h1 Post, #{post._id}
+    a(href='/') Back to home 
+    br
+    br
+    br
+    section 
+        div Phone Number: #{post.phone}
+        div Location: #{post.location}
+        div Help Type: #{post.helpType}
+        if post.description
+        div  Description: #{post.description}
+        div Posted by 
+            a(href=post.user.url) #{post.user.name} 
+            | at #{post.posted}
+    br
+    br
+    if post.isAuthor
+        a(href='/post/edit/'+post._id) edit post 
+        br 
+        a(href='/post/delete/'+post._id) delete post

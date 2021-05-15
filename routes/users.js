@@ -8,15 +8,14 @@ router.get('/', function (req, res, next) {
 });
 router.get('/:userId', function (req, res, next) {
 	if (!req.user) res.redirect('/login');
-	Post.find({ userId: req.user._id })
+	Post.find({ user: req.user._id })
 		.select('description')
 		.sort({ date: 1 })
-		.exec((err, results) => {
+		.exec((err, posts) => {
 			if (err) return next(err);
-			console.log(results);
 			res.render('user_home_page', {
 				title: 'Home:' + req.user.name,
-				posts: results,
+				posts: posts,
 			});
 		});
 });

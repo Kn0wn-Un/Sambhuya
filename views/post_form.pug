@@ -1,32 +1,38 @@
 extends layout 
 block content 
-    h1 New Post
+    h1 Post Form
     form(method='POST' action='')
         label(for='phone') Phone Number:
         br
-        input#phone(type='tel' name='phone' minlength=10 maxlength=10 required='true')
+        input#phone(type='tel' name='phone' minlength=10 maxlength=10 required='true' value=(post? post.phone : ''))
         br
         br
         label(for='location') Location:
         br
         select#location(name='location' required='true')
             for location in locations   
-                option(value=location)=location
+                option(value=location selected=(post ? (location === post.location ? true : false) : false))=location
         br
         br
-        label(for='helptype') Location:
+        label(for='helptype') Help Type:
         br
         select#helptype(name='helptype' required='true')
             for help in helpType   
-                option(value=help)=help
+                option(value=help selected=(post ? (help === post.helpType ? true : false) : false))=help
         br
         br
         label(for='description') Description:
         br
-        textarea#description(name="description", cols="30", rows="10" placeholder='provide details here..' maxlength=10)
+        if !post
+            textarea#description(name="description", cols="30", rows="10" placeholder='provide details here..' maxlength=250)
+        else 
+            textarea#description(name="description", cols="30", rows="10" placeholder='provide details here..' maxlength=250)=post.description
         br
         br
-        button.btn.btn-primary(type='submit') Post
+        if !post
+            button.btn.btn-primary(type='submit') Post
+        else 
+            button.btn.btn-primary(type='submit') Save Edits
     if errors
         ul
         for error in errors
