@@ -63,7 +63,7 @@ exports.postFormPost = [
 						'Hospital Beds',
 						'Plasma Donors',
 					],
-					passError: 'Phone number already exists',
+					phoneErr: results.url,
 				});
 			else {
 				// Data from form is valid.
@@ -171,7 +171,7 @@ exports.postFormEditPost = [
 							'Hospital Beds',
 							'Plasma Donors',
 						],
-						passError: 'Phone number already exists',
+						phoneErr: results.url,
 					});
 			}
 			if (results === null || samePost) {

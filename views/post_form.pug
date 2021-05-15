@@ -37,6 +37,6 @@ block content
         ul
         for error in errors
             li!= error.msg
-    if passError
-        ul
-            li= passError
+    if phoneErr
+            li Phone already exists in 
+                a(href=phoneErr) this post
