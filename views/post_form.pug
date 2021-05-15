@@ -11,14 +11,14 @@ block content
         br
         select#location(name='location' required='true')
             for location in locations   
-                option(value=location selected=(post ? (location === post.location ? true : false) : false))=location
+                option(value=location._id selected=(post ? (location.cityName === post.location.cityName ? true : false) : false))=location.cityName 
         br
         br
         label(for='helptype') Help Type:
         br
         select#helptype(name='helptype' required='true')
             for help in helpType   
-                option(value=help selected=(post ? (help === post.helpType ? true : false) : false))=help
+                option(value=help._id selected=(post ? (help.type === post.helpType.type ? true : false) : false))=help.type
         br
         br
         label(for='description') Description:

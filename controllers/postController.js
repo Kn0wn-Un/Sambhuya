@@ -1,22 +1,31 @@
 const Post = require('../models/post');
+const Location = require('../models/location');
+const HelpType = require('../models/helptype');
 const { body, validationResult } = require('express-validator');
+const async = require('async');
 
-exports.postFormGet = (req, res) => {
+exports.postFormGet = (req, res, next) => {
 	if (!req.user) res.redirect('/login');
-	console.log('test');
-	res.render('post_form', {
-		title: 'New Post',
-		userid: req.user._id,
-		locations: ['Bengaluru', 'Mumbai', 'Goa', 'Chennai'],
-		helpType: [
-			'Masks',
-			'Oxygen Beds',
-			'Respirators',
-			'Hospital Beds',
-			'Plasma Donors',
-		],
-	});
-	return;
+	async.parallel(
+		{
+			locations: function (callback) {
+				Location.find({}).exec(callback);
+			},
+			helpType: function (callback) {
+				HelpType.find({}).exec(callback);
+			},
+		},
+		(err, results) => {
+			if (err) return next(err);
+			res.render('post_form', {
+				title: 'New Post',
+				userid: req.user._id,
+				locations: results.locations,
+				helpType: results.helpType,
+			});
+			return;
+		}
+	);
 };
 
 exports.postFormPost = [
@@ -33,39 +42,54 @@ exports.postFormPost = [
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			// There are errors. Render form again with sanitized values/errors messages.
-			res.render('post_form', {
-				title: 'New Post',
-				userid: req.user._id,
-				locations: ['Bengaluru', 'Mumbai', 'Goa', 'Chennai'],
-				helpType: [
-					'Masks',
-					'Oxygen Beds',
-					'Respirators',
-					'Hospital Beds',
-					'Plasma Donors',
-				],
-				errors: errors.array(),
-			});
-			return;
+			async.parallel(
+				{
+					locations: function (callback) {
+						Location.find({}).exec(callback);
+					},
+					helpType: function (callback) {
+						HelpType.find({}).exec(callback);
+					},
+				},
+				(err, results) => {
+					if (err) return next(err);
+					res.render('post_form', {
+						title: 'New Post',
+						userid: req.user._id,
+						locations: results.locations,
+						helpType: results.helpType,
+						errors: errors.array(),
+					});
+					return;
+				}
+			);
 		}
 		//check if phone already exists
-		Post.findOne({ phone: req.body.phone }).exec(function (err, results) {
+		Post.findOne({ phone: req.body.phone }).exec(function (err, post) {
 			if (err) return next(err);
-			else if (results !== null)
-				res.render('post_form', {
-					title: 'New Post',
-					userid: req.user._id,
-					locations: ['Bengaluru', 'Mumbai', 'Goa', 'Chennai'],
-					helpType: [
-						'Masks',
-						'Oxygen Beds',
-						'Respirators',
-						'Hospital Beds',
-						'Plasma Donors',
-					],
-					phoneErr: results.url,
-				});
-			else {
+			else if (post !== null) {
+				async.parallel(
+					{
+						locations: function (callback) {
+							Location.find({}).exec(callback);
+						},
+						helpType: function (callback) {
+							HelpType.find({}).exec(callback);
+						},
+					},
+					(err, results) => {
+						if (err) return next(err);
+						res.render('post_form', {
+							title: 'New Post',
+							userid: req.user._id,
+							locations: results.locations,
+							helpType: results.helpType,
+							phoneErr: post.url,
+						});
+						return;
+					}
+				);
+			} else {
 				// Data from form is valid.
 				//Create an Post object with escaped and trimmed data.
 				var post = new Post({
@@ -89,6 +113,8 @@ exports.postFormPost = [
 exports.postGet = (req, res, next) => {
 	Post.findById(req.params.postId)
 		.populate('user')
+		.populate('helpType')
+		.populate('location')
 		.exec((err, post) => {
 			if (err) return next(err);
 			post.isAuthor = req.user
@@ -105,22 +131,34 @@ exports.postGet = (req, res, next) => {
 
 exports.postFormEditGet = (req, res, next) => {
 	if (!req.user) return res.redirect('/');
-	Post.findById(req.params.postId).exec((err, post) => {
-		if (err) return next(err);
-		res.render('post_form', {
-			title: 'Edit Post',
-			userid: req.user._id,
-			locations: ['Bengaluru', 'Mumbai', 'Goa', 'Chennai'],
-			helpType: [
-				'Masks',
-				'Oxygen Beds',
-				'Respirators',
-				'Hospital Beds',
-				'Plasma Donors',
-			],
-			post: post,
-		});
-	});
+	async.parallel(
+		{
+			locations: function (callback) {
+				Location.find({}).exec(callback);
+			},
+			helpType: function (callback) {
+				HelpType.find({}).exec(callback);
+			},
+			post: function (callback) {
+				Post.findById(req.params.postId)
+					.populate('user')
+					.populate('helpType')
+					.populate('location')
+					.exec(callback);
+			},
+		},
+		(err, results) => {
+			if (err) return next(err);
+			res.render('post_form', {
+				title: 'Edit Post',
+				userid: req.user._id,
+				locations: results.locations,
+				helpType: results.helpType,
+				post: results.post,
+			});
+			return;
+		}
+	);
 };
 
 exports.postFormEditPost = [
@@ -137,44 +175,68 @@ exports.postFormEditPost = [
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			// There are errors. Render form again with sanitized values/errors messages.
-			res.render('post_form', {
-				title: 'New Post',
-				userid: req.user._id,
-				locations: ['Bengaluru', 'Mumbai', 'Goa', 'Chennai'],
-				helpType: [
-					'Masks',
-					'Oxygen Beds',
-					'Respirators',
-					'Hospital Beds',
-					'Plasma Donors',
-				],
-				post: post,
-				errors: errors.array(),
-			});
-			return;
+			async.parallel(
+				{
+					locations: function (callback) {
+						Location.find({}).exec(callback);
+					},
+					helpType: function (callback) {
+						HelpType.find({}).exec(callback);
+					},
+					post: function (callback) {
+						Post.findById(req.params.postId)
+							.populate('user')
+							.populate('helpType')
+							.populate('location')
+							.exec(callback);
+					},
+				},
+				(err, results) => {
+					if (err) return next(err);
+					res.render('post_form', {
+						title: 'Edit Post',
+						userid: req.user._id,
+						locations: results.locations,
+						helpType: results.helpType,
+						post: results.post,
+						errors: errors.array(),
+					});
+					return;
+				}
+			);
 		}
-		Post.findOne({ phone: req.body.phone }).exec(function (err, results) {
+		Post.findOne({ phone: req.body.phone }).exec(function (err, post) {
 			var samePost = false;
 			if (err) return next(err);
-			else if (results !== null) {
-				if (String(req.params.postId) === String(results._id))
+			else if (post !== null) {
+				if (String(req.params.postId) === String(post._id))
 					samePost = true;
-				else
-					res.render('post_form', {
-						title: 'New Post',
-						userid: req.user._id,
-						locations: ['Bengaluru', 'Mumbai', 'Goa', 'Chennai'],
-						helpType: [
-							'Masks',
-							'Oxygen Beds',
-							'Respirators',
-							'Hospital Beds',
-							'Plasma Donors',
-						],
-						phoneErr: results.url,
-					});
+				else {
+					async.parallel(
+						{
+							locations: function (callback) {
+								Location.find({}).exec(callback);
+							},
+							helpType: function (callback) {
+								HelpType.find({}).exec(callback);
+							},
+						},
+						(err, results) => {
+							if (err) return next(err);
+							res.render('post_form', {
+								title: 'Edit Post',
+								userid: req.user._id,
+								locations: results.locations,
+								helpType: results.helpType,
+								post: post,
+								phoneErr: post.url,
+							});
+							return;
+						}
+					);
+				}
 			}
-			if (results === null || samePost) {
+			if (post === null || samePost) {
 				// Data from form is valid.
 				//Create an Post object with escaped and trimmed data.
 				var post = new Post({

@@ -162,16 +162,18 @@ exports.userLogout = (req, res) => {
 };
 
 exports.userHomePageGet = (req, res, next) => {
+	if (!req.user) return res.redirect('/');
 	Post.find({ user: req.params.userId })
 		.populate('user')
-		.sort({ date: 1 })
+		.populate('helpType')
+		.populate('location')
+		.sort({ posted: -1 })
 		.exec((err, posts) => {
 			if (err) return next(err);
-			var user = posts[0].user;
 			res.render('user_home_page', {
-				title: 'User Page:' + user.name,
+				title: 'User Page:' + req.user.name,
 				posts: posts,
-				user: user,
+				user: req.user,
 			});
 		});
 };

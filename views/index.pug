@@ -14,4 +14,4 @@ block content
         ol  
             for post in posts 
                 li
-                    a(href=post.url)=post.name
+                    a(href=post.url) #{post.helpType.type} in #{post.location.cityName}

@@ -8,8 +8,9 @@ html
         ul
             li 
                 a(href='/') Home 
-            li 
-                a(href='/sign-up') Register
+            if !currentUser 
+                li 
+                    a(href='/sign-up') Register
             if currentUser 
                 li 
                     a(href='/user') Profile

@@ -8,8 +8,8 @@ block content
     br
     section 
         div Phone Number: #{post.phone}
-        div Location: #{post.location}
-        div Help Type: #{post.helpType}
+        div Location: #{post.location.cityName}
+        div Help Type: #{post.helpType.type}
         if post.description
         div  Description: #{post.description}
         div Posted by 
