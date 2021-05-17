@@ -1,20 +1,22 @@
 extends layout 
 block content 
     h1 Login 
-    form(method='POST' action='')
+    form.form-control(method='POST' action='')
         label(for='email') Email:
         br
-        input#email(type='email' placeholder='' name='email' required='true')
-        br
+        input.input-group.mb-3#email(type='email' placeholder='' name='email' required='true')
         br
         label(for='password') Password:
         br
-        input#password(type='password' name='password' required='true')
+        input.input-group.mb-3#password(type='password' name='password' required='true')
         button.btn.btn-primary(type='submit') Login
-    if errors
-        ul
-        for error in errors
-            li!= error.msg
-    if passError
-        ul
-            li= passError
+    section
+        if errors
+            div.alert.alert-danger
+                for error in errors
+                    div= error.msg
+        if passError
+            div.alert.alert-danger 
+                h4.alert-heading Password Should Contain
+                ul
+                    li= passError

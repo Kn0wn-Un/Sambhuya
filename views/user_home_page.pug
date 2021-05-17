@@ -15,7 +15,9 @@ block content
     h3 More Details:
     div Phone: #{user.phone}
     div Email: #{user.email}
-    a(href='/user/edit/'+user._id) Edit details
+    if currentUser
+        -if(String(currentUser._id) === String(user._id))
+            a(href='/user/edit/'+user._id) Edit details
     br
     if posts
         h3 Posts:
