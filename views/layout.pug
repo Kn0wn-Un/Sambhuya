@@ -12,22 +12,25 @@ html
     crossorigin="anonymous")
     link(rel="stylesheet", href="/stylesheets/style.css")
   body
-    aside.navigation
-        ul
-            li 
-                a(href='/') Home 
-            if !currentUser 
-                li 
-                    a(href='/sign-up') Register
-            if currentUser 
-                li 
-                    a(href='/user') My Profile
-            else
-                li 
-                    a(href='/login') Login
-            li 
-                a(href='/about') About Us  
-            li 
-                a(href='/about/contact') Contact Us 
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+        .container-fluid
+            button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            a.navbar-brand.me-auto.web-name(href='/') CovidApp
+            #navbarSupportedContent.collapse.navbar-collapse
+                ul.navbar-nav.me-auto.mb-2.mb-lg-0
+                    li.nav-item
+                        a.nav-link.active(href='/') Home
+                    if !currentUser 
+                        li.nav-item
+                            a.nav-link.active(href='/sign-up') Register
+                    if currentUser 
+                        li.nav-item
+                            a.nav-link.active(href='/user') My Profile
+                    else
+                        li.nav-item
+                            a.nav-link.active(href='/login') Login
+                    li.nav-item
+                        a.nav-link.active(href='/about') About Us
     section.content
         block content

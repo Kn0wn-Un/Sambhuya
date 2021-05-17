@@ -1,13 +1,6 @@
-body {
+.content {
 	padding: 50px;
 }
-.navigation {
-	width: 250px;
-	float: left;
-}
-.navigation li {
-	list-style: none;
-}
-.content {
-	display: inline-block;
+.web-name {
+	padding: 0 15px;
 }
