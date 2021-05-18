@@ -11,14 +11,7 @@ router.post('/', indexController.homePost);
 
 router.get('/login', userController.userLoginGet);
 
-router.post(
-	'/login',
-	userController.userLoginPost,
-	passport.authenticate('local', {
-		successRedirect: '/user',
-		failureRedirect: '/login',
-	})
-);
+router.post('/login', userController.userLoginPost);
 
 router.get('/logout', userController.userLogout);
 

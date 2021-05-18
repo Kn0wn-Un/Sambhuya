@@ -4,13 +4,14 @@ const passwordValidator = require('password-validator');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const async = require('async');
+const passport = require('passport');
 
 var schema = new passwordValidator();
 schema
 	.is()
 	.min(8)
 	.is()
-	.max(100)
+	.max(25)
 	.has()
 	.uppercase()
 	.has()
@@ -33,7 +34,7 @@ exports.userLoginPost = [
 		.escape()
 		.withMessage('Email must be specified.')
 		.isEmail()
-		.withMessage('Email must be proper.'),
+		.withMessage('Invalid Email.'),
 	(req, res, next) => {
 		// Extract the validation errors from a request.
 		const errors = validationResult(req);
@@ -53,8 +54,25 @@ exports.userLoginPost = [
 				passError: 'Password Error',
 			});
 			return;
+		} else {
+			passport.authenticate('local', function (err, user, info) {
+				if (err) {
+					return next(err);
+				}
+				if (!user) {
+					return res.render('user_login', {
+						title: 'Login',
+						errors: [{ msg: 'Password or Email not found' }],
+					});
+				}
+				req.logIn(user, function (err) {
+					if (err) {
+						return next(err);
+					}
+					return res.redirect('/user');
+				});
+			})(req, res, next);
 		}
-		next();
 	},
 ];
 
