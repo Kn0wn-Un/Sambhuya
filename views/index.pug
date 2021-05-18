@@ -29,10 +29,11 @@ block content
                             selected=(selLoc ? (selLoc === location.cityName ? true : false) : false)
                             )=location.cityName 
                     button.btn.btn-primary.filter-btn(type='submit') Filter
+            br
             for post in posts 
                 a.col(href=post.url) 
-                    article.posts
-                        h4 #{post.helpType.type} in #{post.location.cityName}
+                    article.posts.card
+                        h4.card-title #{post.helpType.type} in #{post.location.cityName}
                         div= post.postedDay
         else 
-            h3 No Posts Available
+            h3 No Posts Available :(

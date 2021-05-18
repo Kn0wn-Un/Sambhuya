@@ -24,13 +24,31 @@ html
                     if !currentUser 
                         li.nav-item
                             a.nav-link.active(href='/sign-up') Register
+                        li.nav-item
+                            a.nav-link.active(href='/login') Login
                     if currentUser 
                         li.nav-item
                             a.nav-link.active(href='/user') My Profile
-                    else
-                        li.nav-item
-                            a.nav-link.active(href='/login') Login
                     li.nav-item
                         a.nav-link.active(href='/about') About Us
+    section.imp-links
+        div.alert.alert-warning(type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" 
+        aria-expanded="false" aria-controls="collapseExample") 
+            b Important Links
+            div(class="collapse" id="collapseExample")
+                div(class="card-body") Here are some important links that might help.
+                ul
+                    a.alert-link(href="https://www.who.int/" target="_blank") 
+                        li World Health Organization
+                    a.alert-link(href="https://www.mohfw.gov.in/covid_vaccination/vaccination/index.html"  target="_blank") 
+                        li Ministry of Health and Family Welfare
+                    a.alert-link(href="https://www.mygov.in/covid-19" target="_blank") 
+                        li MyGov.in
+                    a.alert-link(href="https://covid19.karnataka.gov.in/page/Helpline/en" target="_blank")
+                        li Karnataka Covid-19 Informational Portal
+                    a.alert-link(href="https://www.pmcares.gov.in/en/" target="_blank") 
+                        li PM Cares Fund
+                    a.alert-link(href="https://www.mygov.in/aarogya-setu-app/" target="_blank") 
+                        li Aarogya Setu App
     section.container
         block content
