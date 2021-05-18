@@ -1,32 +1,38 @@
 extends layout
 
 block content
-    h1= title
-    if !currentUser
-        h3 Welcome to Covid App(working on name)
-        a(href='/login') Login 
-        | or 
-        a(href='/sign-up') Sign Up 
-    if currentUser 
-        h3 Hello, #{currentUser.name}!
-    if posts
-        form(method="POST" action="") 
-            h3 Filters:
-            select#location(name='location')
-                option(value='') All
-                for location in locations   
-                    option(value=location.cityName
-                    selected=(selLoc ? (selLoc === location.cityName ? true : false) : false)
-                    )=location.cityName 
-            select#helptype(name='helptype')
-                option(value='') All
-                for help in helpType   
-                    option(value=help.type
-                    selected=(selHelp ? (selHelp === help.type ? true : false) : false)
-                    )=help.type
-            button(type='submit') Filter
-        h3 Posts:
-        ol  
+    section.container.welcome-container
+        if !currentUser
+            h1 Welcome to Covid App(working on name)
+            h4
+                a(href='/login') Login 
+                | or 
+                a(href='/sign-up') Sign Up 
+        if currentUser 
+            h1 Hello, #{currentUser.name}!
+    section.container.post-container
+        if posts
+            h2 Posts:
+            form(method="POST" action="") 
+                div.input-group
+                    select.form-select#helptype(name='helptype')
+                        option(value='') All help
+                        for help in helpType   
+                            option(value=help.type
+                            selected=(selHelp ? (selHelp === help.type ? true : false) : false)
+                            )=help.type
+                    span.input-group-text in
+                    select.form-select#location(name='location')
+                        option(value='') All locations
+                        for location in locations   
+                            option(value=location.cityName
+                            selected=(selLoc ? (selLoc === location.cityName ? true : false) : false)
+                            )=location.cityName 
+                    button.btn.btn-primary.filter-btn(type='submit') Filter
             for post in posts 
-                li
-                    a(href=post.url) #{post.helpType.type} in #{post.location.cityName}
+                a.col(href=post.url) 
+                    article.posts
+                        h4 #{post.helpType.type} in #{post.location.cityName}
+                        div= post.postedDay
+        else 
+            h3 No Posts Available

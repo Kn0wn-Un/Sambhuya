@@ -4,3 +4,35 @@
 .web-name {
 	padding: 0 15px;
 }
+.welcome-container {
+	margin: 5% 0 35px 0;
+}
+.posts {
+	margin: 10px 0;
+	padding: 10px;
+	border: 0.5px solid rgba(0, 0, 0, 0.33);
+	border-radius: 5px;
+}
+.posts:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+	transform: scale(1.01);
+	color: rgb(10, 88, 255);
+}
+.col {
+	text-decoration: none;
+}
+.post-container {
+	margin-top: 25px;
+}
+.filter {
+	display: flex;
+	flex-wrap: nowrap;
+}
+.filter-btn {
+	width: 15%;
+}
+@media screen and (max-width: 768px) {
+	.filter-btn {
+		width: 100%;
+	}
+}
