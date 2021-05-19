@@ -1,42 +1,32 @@
 extends layout 
 block content 
-    h1 Post Form
-    form(method='POST' action='')
-        label(for='phone') Phone Number:
-        br
-        input#phone(type='tel' name='phone' minlength=10 maxlength=10 required='true' value=(post? post.phone : ''))
-        br
-        br
-        label(for='location') Location:
-        br
-        select#location(name='location' required='true')
-            for location in locations   
-                option(value=location._id selected=(post ? (location.cityName === post.location.cityName ? true : false) : false))=location.cityName 
-        br
-        br
-        label(for='helptype') Help Type:
-        br
-        select#helptype(name='helptype' required='true')
-            for help in helpType   
-                option(value=help._id selected=(post ? (help.type === post.helpType.type ? true : false) : false))=help.type
-        br
-        br
-        label(for='description') Description:
-        br
-        if !post
-            textarea#description(name="description", cols="30", rows="10" placeholder='provide details here..' maxlength=250)
-        else 
-            textarea#description(name="description", cols="30", rows="10" placeholder='provide details here..' maxlength=250)=post.description
-        br
-        br
-        if !post
-            button(type='submit') Post
-        else 
-            button(type='submit') Save Edits
-    if errors
-        ul
-        for error in errors
-            li!= error.msg
-    if phoneErr
-            li Phone already exists in 
-                a(href=phoneErr) this post
+    section.container.login-form    
+        h1=head
+        form.form-control(method='POST' action='')
+            label(for='phone') Phone Number:
+            input.input-group.mb-3#phone(type='tel' name='phone' minlength=10 maxlength=10 required='true' value=(post? post.phone : ''))
+            label(for='location') Location:
+            select.form-select.mb-3#location(name='location' required='true')
+                for location in locations   
+                    option(value=location._id selected=(post ? (location.cityName === post.location.cityName ? true : false) : false))=location.cityName 
+            label(for='helptype') Help Type:
+            select.form-select.mb-3#helptype(name='helptype' required='true')
+                for help in helpType   
+                    option(value=help._id selected=(post ? (help.type === post.helpType.type ? true : false) : false))=help.type
+            label(for='description') Description
+                if !post
+                    textarea#description(name="description", cols="25", rows="6" placeholder='provide more details here..' maxlength=250)
+                else 
+                    textarea#description(name="description", cols="25", rows="6" placeholder='provide more details here..' maxlength=250)=post.description
+            if !post
+                button.btn.btn-primary(type='submit') Post
+            else 
+                button.btn.btn-primary(type='submit') Save Edits
+        section.error-display
+            if errors
+                div.alert.alert-danger
+                    for error in errors
+                        div= error.msg
+            if phoneErr
+                    div.alert.alert-danger Phone already exists in 
+                        a(href=phoneErr) this post

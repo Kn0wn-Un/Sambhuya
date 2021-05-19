@@ -5,7 +5,10 @@ const { body, validationResult } = require('express-validator');
 const async = require('async');
 
 exports.postFormGet = (req, res, next) => {
-	if (!req.user) res.redirect('/login');
+	if (!req.user) {
+		res.redirect('/login');
+		return;
+	}
 	async.parallel(
 		{
 			locations: function (callback) {
@@ -19,6 +22,7 @@ exports.postFormGet = (req, res, next) => {
 			if (err) return next(err);
 			res.render('post_form', {
 				title: 'New Post',
+				head: 'New Post',
 				userid: req.user._id,
 				locations: results.locations,
 				helpType: results.helpType,
@@ -44,6 +48,10 @@ exports.postFormPost = [
 		throw new Error('Invalid Phone number');
 	}),
 	(req, res, next) => {
+		if (!req.user) {
+			res.redirect('/login');
+			return;
+		}
 		// Extract the validation errors from a request.
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
@@ -61,6 +69,7 @@ exports.postFormPost = [
 					if (err) return next(err);
 					res.render('post_form', {
 						title: 'New Post',
+						head: 'New Post',
 						userid: req.user._id,
 						locations: results.locations,
 						helpType: results.helpType,
@@ -87,6 +96,7 @@ exports.postFormPost = [
 						if (err) return next(err);
 						res.render('post_form', {
 							title: 'New Post',
+							head: 'New Post',
 							userid: req.user._id,
 							locations: results.locations,
 							helpType: results.helpType,
@@ -157,6 +167,7 @@ exports.postFormEditGet = (req, res, next) => {
 			if (err) return next(err);
 			res.render('post_form', {
 				title: 'Edit Post',
+				head: 'Edit Post',
 				userid: req.user._id,
 				locations: results.locations,
 				helpType: results.helpType,
@@ -207,6 +218,7 @@ exports.postFormEditPost = [
 					if (err) return next(err);
 					res.render('post_form', {
 						title: 'Edit Post',
+						head: 'Edit Post',
 						userid: req.user._id,
 						locations: results.locations,
 						helpType: results.helpType,
@@ -237,6 +249,7 @@ exports.postFormEditPost = [
 							if (err) return next(err);
 							res.render('post_form', {
 								title: 'Edit Post',
+								head: 'Edit Post',
 								userid: req.user._id,
 								locations: results.locations,
 								helpType: results.helpType,
