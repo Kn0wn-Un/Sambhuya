@@ -18,6 +18,8 @@ block content
     if currentUser
         -if(String(currentUser._id) === String(user._id))
             a(href='/user/edit/'+user._id) Edit details
+            br
+            a(href='/user/change-password/'+user._id) Change Password
     br
     if posts
         h3 Posts:

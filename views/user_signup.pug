@@ -1,38 +1,47 @@
 extends layout 
 block content 
-    h1 User Form
-    form(method='POST' action='')
-        label(for='name') Name:
-        br
-        input#name(type='text' placeholder='Name' name='name' required='true' max=50
-            value=user?user.name:'')
-        br
-        br
-        label(for='phone') Phone Number:
-        br
-        input#phone(type='tel' name='phone' minlength=10 maxlength=10 required='true'
-            value=user?user.phone:'')
-        br
-        br
-        label(for='email') Email:
-        br
-        input#email(type='email' placeholder='xyz@mail.com' name='email' required='true'
-            value=user?user.email:'')
-        br
-        br
-        label(for='password') Password:
-        br
-        input#password(type='password' name='password' required='true')
-        br
-        br
-        if !user
-            button.btn.btn-primary(type='submit') Sign Up
-        else
-            button.btn.btn-primary(type='submit') Save Edits
-    if errors
-        ul
-        for error in errors
-            li!= error.msg
-    if passError
-        ul
-            li= passError
+    section.container.login-form
+        h1 User Registration
+        form.form-control(method='POST' action='')
+            label(for='name') Name:
+            input.input-group.mb-3#name(type='text' placeholder='Name' name='name' required='true' max=50
+                value=user?user.name:'')
+            label(for='phone') Phone Number:
+            input.input-group.mb-3#phone(type='tel' name='phone' minlength=10 maxlength=10 required='true'
+                value=user?user.phone:'')
+            label(for='email') Email:
+            input.input-group.mb-3#email(type='email' placeholder='xyz@mail.com' name='email' required='true'
+                value=user?user.email:'')
+            if !user
+                label(for='password') Password:
+                input.input-group.mb-3#password(type='password' name='password' required='true')
+                ul.form-text 
+                    li Password should have a 
+                        em 
+                            b minimum 
+                        | of 8 characters
+                    li Password can have a 
+                        em 
+                            b maximum 
+                        | of 25 characters
+                    li Password should contain an 
+                        em 
+                            b Uppercase 
+                        | letter
+                    li Password should contain a 
+                        em 
+                            b Digit 
+                    li Password should 
+                        em not 
+                        | contain spaces
+            if !user
+                button.btn.btn-primary(type='submit') Sign Up
+            else
+                button.btn.btn-primary(type='submit') Save Edits
+        section.error-display
+            if errors
+                div.alert.alert-danger
+                    for error in errors
+                        div= error.msg
+            if passError
+                div.alert.alert-danger Invalid Password

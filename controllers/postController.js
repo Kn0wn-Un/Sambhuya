@@ -37,6 +37,12 @@ exports.postFormPost = [
 		.withMessage('Phone Number must be specified.')
 		.isNumeric()
 		.withMessage('Phone must have only numbers.'),
+	body('phone').custom((value) => {
+		if (/[7-9][0-9]{9}/.test(value)) {
+			return true;
+		}
+		throw new Error('Invalid Phone number');
+	}),
 	(req, res, next) => {
 		// Extract the validation errors from a request.
 		const errors = validationResult(req);
@@ -169,6 +175,12 @@ exports.postFormEditPost = [
 		.withMessage('Phone Number must be specified.')
 		.isNumeric()
 		.withMessage('Phone must have only numbers.'),
+	body('phone').custom((value) => {
+		if (/[7-9][0-9]{9}/.test(value)) {
+			return true;
+		}
+		throw new Error('Invalid Phone number');
+	}),
 	(req, res, next) => {
 		if (!req.user) return res.redirect('/');
 		// Extract the validation errors from a request.
