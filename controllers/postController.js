@@ -127,6 +127,7 @@ exports.postFormPost = [
 ];
 
 exports.postGet = (req, res, next) => {
+	var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
 	Post.findById(req.params.postId)
 		.populate('user')
 		.populate('helpType')
@@ -141,6 +142,7 @@ exports.postGet = (req, res, next) => {
 			res.render('post_page', {
 				title: !req.user ? 'post' : req.user.name + ' | post',
 				post: post,
+				share: fullUrl,
 			});
 		});
 };

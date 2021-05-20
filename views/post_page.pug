@@ -1,23 +1,33 @@
 extends layout
 
 block content
-    h1 Lead, #{post._id}
-    a(href='/') Back to home 
-    br
-    br
-    br
-    section 
-        div Phone Number: #{post.phone}
-        div Location: #{post.location.cityName}
-        div Help Type: #{post.helpType.type}
-        if post.description
-        div  Description: #{post.description}
-        div Posted by 
-            a(href=post.user.url) #{post.user.name} 
-            | at #{post.posted}
-    br
-    br
-    if post.isAuthor
-        a(href='/post/edit/'+post._id) edit post 
-        br 
-        a(href='/post/delete/'+post._id) delete post
+    section.container.lead-container
+        h1.user-name Lead,
+            h2.post-heading #{post.helpType.type} in #{post.location.cityName}
+            section.card.post-details
+                div.card-body
+                    h5 
+                        em Phone Number: 
+                    h4 #{post.phone}
+                    h5
+                        em Location: 
+                    h4 #{post.location.cityName}
+                    h5 
+                        em Help Type: 
+                    h4 #{post.helpType.type}
+                    if post.description
+                    h5  
+                        em Description: 
+                    h4 #{post.description}
+                    div.posted-by Posted by 
+                        a(href=post.user.url) #{post.user.name} 
+                        | on #{post.postedDay}
+        if post.isAuthor
+            div.lead-buttons
+                a(href='/post/edit/'+post._id) 
+                    button.btn.btn-primary Edit lead 
+                a(href='/post/delete/'+post._id)
+                    button.btn.btn-danger Delete lead
+        input#share(type="text" value=share)
+        button.btn.btn-outline-primary(onClick="copyLink()") Copy lead link
+        span.alert.alert-success.copy-success#toast Link copied!

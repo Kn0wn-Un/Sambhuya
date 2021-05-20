@@ -5,14 +5,6 @@
 	padding: 0 25px;
 	font-size: 35px;
 }
-@media screen and (min-width: 1024px) {
-	nav {
-		height: 100px;
-	}
-	.nav-link {
-		font-size: 18px;
-	}
-}
 .nav-link:hover {
 	transform: scale(1.2);
 }
@@ -44,20 +36,6 @@
 .nav-logout {
 	display: none;
 }
-@media screen and (max-width: 768px) {
-	.filter-btn {
-		width: 100%;
-	}
-	.web-name {
-		font-size: 25px;
-	}
-	.page-logout {
-		display: none;
-	}
-	.nav-logout {
-		display: block;
-	}
-}
 .login-form {
 	width: 350px;
 	padding: 3% 0;
@@ -84,7 +62,7 @@
 }
 .user-name {
 	padding: 20px 0;
-	font-size: 60px;
+	font-size: 53px;
 }
 .post-heading {
 	font-size: 40px;
@@ -99,4 +77,73 @@
 }
 .btn:hover {
 	transform: scale(1.1);
+}
+.post-details,
+.lead-buttons {
+	margin-bottom: 15px;
+	width: 500px;
+}
+.post-details h5 {
+	font-weight: 600;
+}
+.lead-container {
+	padding-bottom: 20px;
+}
+.posted-by {
+	color: grey;
+	margin-top: 20px;
+}
+.lead-buttons {
+	display: flex;
+	justify-content: space-between;
+}
+#share {
+	display: none;
+}
+.copy-success {
+	text-align: center;
+	visibility: hidden;
+	z-index: -1;
+	position: relative;
+}
+.show {
+	visibility: visible;
+	left: 25px;
+	-webkit-animation: showToast ease-out 0.5s;
+	animation: showToast ease-out 0.5s;
+}
+@keyframes showToast {
+	from {
+		top: 50px;
+	}
+	to {
+		visibility: visible;
+		top: 0px;
+	}
+}
+@media screen and (max-width: 768px) {
+	.filter-btn {
+		width: 100%;
+	}
+	.web-name {
+		font-size: 25px;
+	}
+	.page-logout {
+		display: none;
+	}
+	.nav-logout {
+		display: block;
+	}
+	.post-details,
+	.lead-buttons {
+		width: 300px;
+	}
+}
+@media screen and (min-width: 1024px) {
+	nav {
+		height: 100px;
+	}
+	.nav-link {
+		font-size: 18px;
+	}
 }
