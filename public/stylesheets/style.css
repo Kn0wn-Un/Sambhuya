@@ -19,9 +19,6 @@
 .imp-links button {
 	width: 100%;
 }
-.welcome-container {
-	margin: 5% 0 35px 0;
-}
 .posts {
 	margin: 10px 0;
 	padding: 10px;
@@ -44,12 +41,21 @@
 .filter-btn {
 	width: 15%;
 }
+.nav-logout {
+	display: none;
+}
 @media screen and (max-width: 768px) {
 	.filter-btn {
 		width: 100%;
 	}
 	.web-name {
 		font-size: 25px;
+	}
+	.page-logout {
+		display: none;
+	}
+	.nav-logout {
+		display: block;
 	}
 }
 .login-form {
@@ -62,4 +68,35 @@
 }
 .error-display {
 	margin-top: 10px;
+}
+.contact-group h4,
+.contact-group a {
+	padding: 0 20px;
+}
+.contact-group a {
+	font-size: 18px;
+}
+.contact-group a:hover {
+	transform: scale(1.2);
+}
+.page-logout {
+	margin-right: 3vw;
+}
+.user-name {
+	padding: 20px 0;
+	font-size: 60px;
+}
+.post-heading {
+	font-size: 40px;
+}
+.new-post {
+	color: white;
+	background-color: rgb(13, 110, 253);
+}
+.new-post:hover {
+	color: rgb(13, 110, 253);
+	background-color: white;
+}
+.btn:hover {
+	transform: scale(1.1);
 }

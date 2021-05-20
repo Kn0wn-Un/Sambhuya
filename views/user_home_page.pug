@@ -1,29 +1,29 @@
 extends layout
 
 block content
-    if currentUser
-        -if(String(currentUser._id) === String(user._id))
-            h1 Hello, #{currentUser.name}
-            a(href='/post/new-post')
-                h3 Create new Post
-            a(href='/logout')
-                h3 Logout
-        -else 
-            h1 User, #{user.name}
-    else 
-        h1 User, #{user.name}
-    h3 More Details:
-    div Phone: #{user.phone}
-    div Email: #{user.email}
-    if currentUser
-        -if(String(currentUser._id) === String(user._id))
-            a(href='/user/edit/'+user._id) Edit details
-            br
-            a(href='/user/change-password/'+user._id) Change Password
-    br
-    if posts
-        h3 Posts:
-        ol
-            for post in posts
-                li
-                    a(href=post.url) #{post.helpType.type} in #{post.location.cityName}
+    section.container
+        h1.user-name  #{user.name}
+        div.contact-group.card
+            div.card-body
+                h2.card-title Contact Me:
+                h4 Phone: #{user.phone}
+                h4 Email: #{user.email}
+                if currentUser
+                    -if(String(currentUser._id) === String(user._id))
+                        a(href='/user/edit/'+user._id) Edit details
+                        br
+                        a(href='/user/change-password/'+user._id) Change Password
+    section.container.post-container
+        h2.post-heading Leads Shared:
+        if currentUser
+            -if(String(currentUser._id) === String(user._id))
+                a(href='/post/new-post')
+                    button.btn.btn-outline-primary.btn-lg.new-post Post new Lead
+        if posts
+           for post in posts 
+                a.col(href=post.url) 
+                    article.posts.card
+                        h4.card-title #{post.helpType.type} in #{post.location.cityName}
+                        div= post.postedDay
+        else 
+            h3 No Posts Available :(

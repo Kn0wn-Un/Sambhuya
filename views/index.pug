@@ -1,18 +1,18 @@
 extends layout
 
 block content
-    section.container.welcome-container
+    section.container
         if !currentUser
-            h1 Welcome to Covid App(working on name)
+            h1.user-name Welcome to Covid App(working on name)
             h4
                 a(href='/login') Login 
                 | or 
                 a(href='/sign-up') Sign Up 
         if currentUser 
-            h1 Hello, #{currentUser.name}!
+            h1.user-name Hello, #{currentUser.name}!
     section.container.post-container
         if posts
-            h2 Posts:
+            h2 All Leads:
             form(method="POST" action="") 
                 div.input-group
                     select.form-select#helptype(name='helptype')

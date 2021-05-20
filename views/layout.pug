@@ -29,8 +29,13 @@ html
                     if currentUser 
                         li.nav-item
                             a.nav-link.active(href='/user') My Profile
+                        li.nav-item
+                            a.nav-link.active.nav-logout(href='/logout') Logout
                     li.nav-item
                         a.nav-link.active(href='/about') About Us
+            if currentUser 
+                a(href='/logout')
+                    button.btn.btn-danger.page-logout Logout
     section.imp-links
         div.alert.alert-warning(type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" 
         aria-expanded="false" aria-controls="collapseExample") 
