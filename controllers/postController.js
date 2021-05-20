@@ -21,8 +21,8 @@ exports.postFormGet = (req, res, next) => {
 		(err, results) => {
 			if (err) return next(err);
 			res.render('post_form', {
-				title: 'New Post',
-				head: 'New Post',
+				title: 'New Lead',
+				head: 'New Lead',
 				userid: req.user._id,
 				locations: results.locations,
 				helpType: results.helpType,
@@ -68,8 +68,8 @@ exports.postFormPost = [
 				(err, results) => {
 					if (err) return next(err);
 					res.render('post_form', {
-						title: 'New Post',
-						head: 'New Post',
+						title: 'New Lead',
+						head: 'New Lead',
 						userid: req.user._id,
 						locations: results.locations,
 						helpType: results.helpType,
@@ -95,8 +95,8 @@ exports.postFormPost = [
 					(err, results) => {
 						if (err) return next(err);
 						res.render('post_form', {
-							title: 'New Post',
-							head: 'New Post',
+							title: 'New Lead',
+							head: 'New Lead',
 							userid: req.user._id,
 							locations: results.locations,
 							helpType: results.helpType,
@@ -166,8 +166,8 @@ exports.postFormEditGet = (req, res, next) => {
 		(err, results) => {
 			if (err) return next(err);
 			res.render('post_form', {
-				title: 'Edit Post',
-				head: 'Edit Post',
+				title: 'Edit Lead',
+				head: 'Edit Lead',
 				userid: req.user._id,
 				locations: results.locations,
 				helpType: results.helpType,
@@ -217,8 +217,8 @@ exports.postFormEditPost = [
 				(err, results) => {
 					if (err) return next(err);
 					res.render('post_form', {
-						title: 'Edit Post',
-						head: 'Edit Post',
+						title: 'Edit Lead',
+						head: 'Edit Lead',
 						userid: req.user._id,
 						locations: results.locations,
 						helpType: results.helpType,
@@ -248,8 +248,8 @@ exports.postFormEditPost = [
 						(err, results) => {
 							if (err) return next(err);
 							res.render('post_form', {
-								title: 'Edit Post',
-								head: 'Edit Post',
+								title: 'Edit Lead',
+								head: 'Edit Lead',
 								userid: req.user._id,
 								locations: results.locations,
 								helpType: results.helpType,

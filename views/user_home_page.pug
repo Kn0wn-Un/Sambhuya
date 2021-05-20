@@ -3,13 +3,16 @@ extends layout
 block content
     section.container
         h1.user-name  #{user.name}
-        div.contact-group.card
-            div.card-body
-                h2.card-title Contact Me:
-                h4 Phone: #{user.phone}
-                h4 Email: #{user.email}
-                if currentUser
-                    -if(String(currentUser._id) === String(user._id))
+        if currentUser
+            div.contact-group.card
+                div.card-body
+                    -if(String(currentUser._id) === String(user._id)) 
+                        h2.card-title My Details:
+                    -else
+                        h2.card-title Contact Me:
+                    h4 Phone: #{user.phone}
+                    h4 Email: #{user.email}
+                    -if(String(currentUser._id) === String(user._id)) 
                         a(href='/user/edit/'+user._id) Edit details
                         br
                         a(href='/user/change-password/'+user._id) Change Password

@@ -3,7 +3,8 @@ extends layout
 block content
     section.container
         if !currentUser
-            h1.user-name Welcome to Covid App(working on name)
+            h1.user-name (working on name)
+            h3 Hope this website helps you, Stay Safe.
             h4
                 a(href='/login') Login 
                 | or 
@@ -12,7 +13,7 @@ block content
             h1.user-name Hello, #{currentUser.name}!
     section.container.post-container
         if posts
-            h2 All Leads:
+            h2.post-heading All Leads:
             form(method="POST" action="") 
                 div.input-group
                     select.form-select#helptype(name='helptype')
