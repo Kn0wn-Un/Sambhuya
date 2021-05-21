@@ -21,7 +21,9 @@ block content
         if currentUser
             -if(String(currentUser._id) === String(user._id))
                 a(href='/post/new-post')
-                    button.btn.btn-outline-primary.btn-lg.new-post Post new Lead
+                    button.btn.btn-outline-primary.btn-lg.new-post 
+                        span.material-icons-outlined create
+                        span.create-text Post new lead
         if posts
            for post in posts 
                 a.col(href=post.url) 

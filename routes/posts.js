@@ -13,4 +13,6 @@ router.get('/edit/:postId', postController.postFormEditGet);
 router.post('/edit/:postId', postController.postFormEditPost);
 
 router.get('/delete/:postId', postController.postDelete);
+
+router.get('/verify/:postId/:userId', postController.verifyLeadGet);
 module.exports = router;

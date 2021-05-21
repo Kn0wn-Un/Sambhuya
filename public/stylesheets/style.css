@@ -91,6 +91,7 @@
 }
 .posted-by {
 	color: grey;
+	font-weight: 600;
 	margin-top: 20px;
 }
 .lead-buttons {
@@ -109,12 +110,48 @@
 .show {
 	visibility: visible;
 	left: 25px;
-	-webkit-animation: showToast ease-out 0.5s;
-	animation: showToast ease-out 0.5s;
+	-webkit-animation: showToast ease-out 0.4s;
+	animation: showToast ease-out 0.4s;
+}
+.copy-text {
+	position: relative;
+	top: -3px;
+}
+.create-text {
+	position: relative;
+	top: -3px;
+	left: 3px;
+}
+.verified {
+	padding-bottom: 5px;
+	color: rgb(25, 135, 84);
+	font-style: italic;
+}
+.verified-txt {
+	font-size: 1.1em;
+	position: relative;
+	top: -5px;
+	padding-left: 5px;
+}
+.verify-icon {
+	position: relative;
+	top: 3px;
+}
+.verify-div {
+	color: grey;
+	font-style: italic;
+	margin-top: 10px;
+}
+.thanks {
+	color: rgb(13, 110, 253);
+}
+.thanks-icon {
+	color: red;
+	padding-left: 3px;
 }
 @keyframes showToast {
 	from {
-		top: 50px;
+		top: -20px;
 	}
 	to {
 		visibility: visible;

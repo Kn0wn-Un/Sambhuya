@@ -9,7 +9,6 @@ function copyLink() {
 	/* Copy the text inside the text field */
 	document.execCommand('copy');
 	navigator.clipboard.writeText(copyText.value);
-	console.log(copyText.value);
 
 	var x = document.getElementById('toast');
 	x.classList.add('show');

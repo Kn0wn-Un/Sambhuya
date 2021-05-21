@@ -132,6 +132,7 @@ exports.postGet = (req, res, next) => {
 		.populate('user')
 		.populate('helpType')
 		.populate('location')
+		.populate('verified')
 		.exec((err, post) => {
 			if (err) return next(err);
 			post.isAuthor = req.user
@@ -139,10 +140,19 @@ exports.postGet = (req, res, next) => {
 					? true
 					: false
 				: false;
+			var hasVerified = false;
+			if (req.user) {
+				for (var i = 0; i < post.verified.length; i++)
+					if (String(req.user._id) === String(post.verified[i]._id)) {
+						hasVerified = req.user._id;
+						break;
+					}
+			}
 			res.render('post_page', {
 				title: !req.user ? 'post' : req.user.name + ' | post',
 				post: post,
 				share: fullUrl,
+				hasVerified: hasVerified,
 			});
 		});
 };
@@ -162,6 +172,7 @@ exports.postFormEditGet = (req, res, next) => {
 					.populate('user')
 					.populate('helpType')
 					.populate('location')
+					.populate('verified')
 					.exec(callback);
 			},
 		},
@@ -213,6 +224,7 @@ exports.postFormEditPost = [
 							.populate('user')
 							.populate('helpType')
 							.populate('location')
+							.populate('verified')
 							.exec(callback);
 					},
 				},
@@ -296,4 +308,40 @@ exports.postDelete = (req, res, next) => {
 		if (err) return next(err);
 		else res.redirect('/user');
 	});
+};
+
+exports.verifyLeadGet = (req, res, next) => {
+	if (!req.user) return res.redirect('/login');
+	backURL = req.header('Referer') || '/';
+	Post.findOne({ _id: req.params.postId })
+		.populate('verified')
+		.exec(function (err, post) {
+			if (err) return next(err);
+			if (post === null) {
+				return res.redirect(backURL);
+			} else if (post.verified.length !== 0) {
+				for (var i = 0; i < post.verified.length; i++)
+					if (
+						String(post.verified[i]._id) ===
+						String(req.params.userId)
+					) {
+						return res.redirect(backURL);
+					}
+			}
+			Post.findByIdAndUpdate(
+				req.params.postId,
+				{
+					$push: {
+						verified: req.params.userId,
+					},
+				},
+				{},
+				function (err, result) {
+					if (err) {
+						return next(err);
+					}
+					return res.redirect(backURL);
+				}
+			);
+		});
 };

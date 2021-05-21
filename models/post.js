@@ -13,6 +13,7 @@ var PostSchema = new Schema({
 	posted: { type: Date, default: Date.now() },
 	description: { type: String, maxlength: 250 },
 	user: { type: Schema.Types.ObjectId, ref: 'User' },
+	verified: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
 PostSchema.virtual('url').get(function () {
