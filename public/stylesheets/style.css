@@ -9,7 +9,7 @@ body {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
 		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	font-style: italic;
-	padding: 0 15px;
+	padding: 0 30px;
 	font-size: 35px;
 }
 .nav-link:hover {
@@ -159,6 +159,27 @@ body {
 	color: red;
 	padding-left: 3px;
 }
+.ht {
+	font-weight: 600;
+	font-style: italic;
+	font-size: 20px;
+	margin: 35px 0;
+}
+.about p {
+	font-size: 18px;
+}
+.about-q {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: italic;
+	font-weight: 600;
+}
+.about {
+	margin-top: 25px;
+}
+.nav-link {
+	font-weight: 600;
+}
 @keyframes showToast {
 	from {
 		top: -20px;
@@ -174,6 +195,7 @@ body {
 	}
 	.web-name {
 		font-size: 25px;
+		padding-left: 5px;
 	}
 	.page-logout {
 		display: none;

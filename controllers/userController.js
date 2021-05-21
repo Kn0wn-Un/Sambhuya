@@ -172,7 +172,7 @@ exports.userSignupPost = [
 								if (err) {
 									return next(err);
 								}
-								res.redirect('/login');
+								return res.redirect('/login');
 							});
 						}
 					);
@@ -204,7 +204,7 @@ exports.userHomePageGet = (req, res, next) => {
 		},
 		function (err, results) {
 			if (err) return next(err);
-			res.render('user_home_page', {
+			return res.render('user_home_page', {
 				title: 'User Page: ' + results.user.name,
 				posts: results.posts,
 				user: results.user,
@@ -217,7 +217,7 @@ exports.userEditGet = (req, res, next) => {
 	if (!req.user) return res.redirect('/');
 	User.findById(req.params.userId).exec((err, user) => {
 		if (err) return next(err);
-		res.render('user_signup', {
+		return res.render('user_signup', {
 			title: 'Edit User:' + user.name,
 			user: user,
 		});
@@ -314,7 +314,7 @@ exports.userEditPost = [
 							if (err) {
 								return next(err);
 							}
-							res.redirect(req.user.url);
+							return res.redirect(req.user.url);
 						}
 					);
 				}
@@ -327,7 +327,7 @@ exports.userChangePassword = (req, res, next) => {
 	if (!req.user) return res.redirect('/');
 	User.findById(req.params.userId).exec((err, user) => {
 		if (err) return next(err);
-		res.render('user_change_password', {
+		return res.render('user_change_password', {
 			title: 'Change Password:' + user.name,
 			user: user,
 		});
@@ -381,11 +381,13 @@ exports.userChangePasswordPost = (req, res, next) => {
 							);
 						}
 					);
+					return;
 				} else {
 					res.render('user_change_password', {
 						title: 'Change Password:' + req.user.name,
 						passError: 'New Passwords do not match',
 					});
+					return;
 				}
 			} else {
 				res.render('user_change_password', {

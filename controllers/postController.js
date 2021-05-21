@@ -42,7 +42,7 @@ exports.postFormPost = [
 		.isNumeric()
 		.withMessage('Phone must have only numbers.'),
 	body('phone').custom((value) => {
-		if (/[7-9][0-9]{9}/.test(value)) {
+		if (/[6-9][0-9]{9}/.test(value)) {
 			return true;
 		}
 		throw new Error('Invalid Phone number');
@@ -102,9 +102,9 @@ exports.postFormPost = [
 							helpType: results.helpType,
 							phoneErr: post.url,
 						});
-						return;
 					}
 				);
+				return;
 			} else {
 				// Data from form is valid.
 				//Create an Post object with escaped and trimmed data.
@@ -119,8 +119,9 @@ exports.postFormPost = [
 					if (err) {
 						return next(err);
 					}
-					res.redirect(req.user.url);
+					return res.redirect(req.user.url);
 				});
+				return;
 			}
 		});
 	},
@@ -148,7 +149,7 @@ exports.postGet = (req, res, next) => {
 						break;
 					}
 			}
-			res.render('post_page', {
+			return res.render('post_page', {
 				title: !req.user ? 'post' : req.user.name + ' | post',
 				post: post,
 				share: fullUrl,
@@ -200,7 +201,7 @@ exports.postFormEditPost = [
 		.isNumeric()
 		.withMessage('Phone must have only numbers.'),
 	body('phone').custom((value) => {
-		if (/[7-9][0-9]{9}/.test(value)) {
+		if (/[6-9][0-9]{9}/.test(value)) {
 			return true;
 		}
 		throw new Error('Invalid Phone number');
@@ -270,9 +271,9 @@ exports.postFormEditPost = [
 								post: post,
 								phoneErr: post.url,
 							});
-							return;
 						}
 					);
+					return;
 				}
 			}
 			if (post === null || samePost) {
@@ -297,6 +298,7 @@ exports.postFormEditPost = [
 						res.redirect(req.user.url);
 					}
 				);
+				return;
 			}
 		});
 	},
@@ -306,7 +308,7 @@ exports.postDelete = (req, res, next) => {
 	if (!req.user) return res.redirect('/');
 	Post.findByIdAndRemove(req.params.postId).exec((err, del) => {
 		if (err) return next(err);
-		else res.redirect('/user');
+		else return res.redirect('/user');
 	});
 };
 
