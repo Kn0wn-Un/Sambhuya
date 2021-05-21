@@ -180,6 +180,27 @@ body {
 .nav-link {
 	font-weight: 600;
 }
+.marquee {
+	display: inline-block;
+	width: max-content;
+	padding-left: 100%;
+	animation: marquee 30s linear infinite;
+}
+.marquee:hover {
+	animation-play-state: paused;
+}
+.marquee a {
+	color: rgb(255, 0, 0);
+	padding: 0 20px;
+}
+@keyframes marquee {
+	0% {
+		transform: translate(0, 0);
+	}
+	100% {
+		transform: translate(-100%, 0);
+	}
+}
 @keyframes showToast {
 	from {
 		top: -20px;
