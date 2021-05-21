@@ -99,7 +99,7 @@ exports.userSignupPost = [
 		.isMobilePhone()
 		.withMessage('Invaild Phone number.'),
 	body('phone').custom((value) => {
-		if (/[7-9][0-9]{9}/.test(value)) {
+		if (/[6-9][0-9]{9}/.test(value)) {
 			return true;
 		}
 		throw new Error('Invalid Phone number');
@@ -241,7 +241,7 @@ exports.userEditPost = [
 		.isNumeric()
 		.withMessage('Phone must have only numbers.'),
 	body('phone').custom((value) => {
-		if (/[7-9][0-9]{9}/.test(value)) {
+		if (/[6-9][0-9]{9}/.test(value)) {
 			return true;
 		}
 		throw new Error('Invalid Phone number');

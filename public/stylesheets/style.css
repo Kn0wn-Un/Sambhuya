@@ -1,8 +1,15 @@
+body {
+	font-family: Calibri;
+}
+
 .content {
 	padding: 50px;
 }
 .web-name {
-	padding: 0 25px;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	font-style: italic;
+	padding: 0 15px;
 	font-size: 35px;
 }
 .nav-link:hover {
@@ -10,6 +17,10 @@
 }
 .imp-links button {
 	width: 100%;
+}
+.imp-ref a {
+	font-weight: 500;
+	color: rgb(215, 0, 0);
 }
 .posts {
 	margin: 10px 0;
@@ -62,10 +73,10 @@
 }
 .user-name {
 	padding: 20px 0;
-	font-size: 53px;
+	font-size: 40px;
 }
 .post-heading {
-	font-size: 40px;
+	font-size: 30px;
 }
 .new-post {
 	color: white;
@@ -91,7 +102,6 @@
 }
 .posted-by {
 	color: grey;
-	font-weight: 600;
 	margin-top: 20px;
 }
 .lead-buttons {
