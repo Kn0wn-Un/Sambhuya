@@ -9,7 +9,10 @@ body {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
 		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	font-style: italic;
-	padding: 0 30px;
+	padding: 0 25px 0 0;
+	position: relative;
+	left: -10px;
+	top: 5px;
 	font-size: 35px;
 }
 .nav-link:hover {
@@ -193,6 +196,13 @@ body {
 	color: rgb(255, 0, 0);
 	padding: 0 20px;
 }
+.logo {
+	box-sizing: border-box;
+	padding-top: 25px;
+	filter: brightness(0) invert(1);
+	width: 100px;
+	height: 100px;
+}
 @keyframes marquee {
 	0% {
 		transform: translate(0, 0);
@@ -217,8 +227,12 @@ body {
 	.web-name {
 		font-size: 25px;
 		padding-left: 5px;
+		position: relative;
+		left: 0;
+		top: 0;
 	}
-	.page-logout {
+	.page-logout,
+	.logo {
 		display: none;
 	}
 	.nav-logout {
