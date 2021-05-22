@@ -18,12 +18,9 @@ body {
 .nav-link:hover {
 	transform: scale(1.2);
 }
-.imp-links button {
+.imp-links {
+	overflow: hidden;
 	width: 100%;
-}
-.imp-ref a {
-	font-weight: 500;
-	color: rgb(215, 0, 0);
 }
 .posts {
 	margin: 10px 0;
@@ -223,6 +220,9 @@ body {
 	filter: brightness(0) invert(1);
 	width: 100px;
 	height: 100px;
+}
+.profile .name {
+	font-size: 1.25rem;
 }
 @keyframes marquee {
 	0% {
