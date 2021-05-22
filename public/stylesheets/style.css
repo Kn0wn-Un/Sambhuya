@@ -170,12 +170,12 @@ body {
 }
 .about-q {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 24px;
+	font-size: 21px;
 	font-style: italic;
 	font-weight: 600;
 }
 .about {
-	margin-top: 25px;
+	margin-top: 10px;
 }
 .nav-link {
 	font-weight: 600;
@@ -224,6 +224,44 @@ body {
 .profile .name {
 	font-size: 1.25rem;
 }
+.profile i {
+	font-size: 1.4rem;
+}
+.profile a {
+	font-size: 1rem;
+	font-weight: 600;
+}
+.contact {
+	background-color: rgb(14, 42, 90);
+	color: white;
+}
+.contact .profile {
+	padding: 10px 25px;
+}
+.contact .profile a {
+	color: white;
+	text-decoration: none;
+}
+.contact-h {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: italic;
+	padding: 10px 15px;
+}
+.contact-icons {
+	padding: 0 20px;
+}
+footer {
+	margin-top: 25px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 600;
+	text-align: center;
+}
+footer a {
+	font-size: 1.1rem;
+	text-decoration: none;
+	color: rgb(51, 51, 51);
+}
 @keyframes marquee {
 	0% {
 		transform: translate(0, 0);
@@ -262,6 +300,9 @@ body {
 	.post-details,
 	.lead-buttons {
 		width: 300px;
+	}
+	.nav-link:hover {
+		transform: scale(1);
 	}
 }
 @media screen and (min-width: 1024px) {
