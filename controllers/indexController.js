@@ -24,7 +24,7 @@ exports.homeGet = (req, res, next) => {
 		(err, results) => {
 			if (err) return next(err);
 			res.render('index', {
-				title: 'Home',
+				title: 'Sambhuya',
 				locations: results.locations,
 				helpType: results.helpType,
 				posts: results.posts,
@@ -75,7 +75,7 @@ exports.homePost = (req, res, next) => {
 						filterPosts.push(results.posts[i]);
 			} else filterPosts = results.posts;
 			res.render('index', {
-				title: 'Home',
+				title: 'Sambhuya',
 				locations: results.locations,
 				helpType: results.helpType,
 				posts: filterPosts,
