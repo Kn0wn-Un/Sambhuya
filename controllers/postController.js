@@ -150,7 +150,7 @@ exports.postGet = (req, res, next) => {
 					}
 			}
 			return res.render('post_page', {
-				title: !req.user ? 'post' : req.user.name + ' | post',
+				title: 'Lead: ' + post.helpType.type,
 				post: post,
 				share: fullUrl,
 				hasVerified: hasVerified,

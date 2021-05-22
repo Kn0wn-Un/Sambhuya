@@ -195,6 +195,7 @@ exports.userHomePageGet = (req, res, next) => {
 					.populate('user')
 					.populate('helpType')
 					.populate('location')
+					.populate('verified')
 					.sort({ posted: -1 })
 					.exec(callback);
 			},
@@ -204,10 +205,17 @@ exports.userHomePageGet = (req, res, next) => {
 		},
 		function (err, results) {
 			if (err) return next(err);
+			var verified = 0;
+			for (var i = 0; i < results.posts.length; i++) {
+				if (!results.posts[i].verified) continue;
+				else if (results.posts[i].verified.length === 0) continue;
+				else verified++;
+			}
 			return res.render('user_home_page', {
 				title: 'User Page: ' + results.user.name,
 				posts: results.posts,
 				user: results.user,
+				verifiedPosts: verified,
 			});
 		}
 	);

@@ -183,6 +183,27 @@ body {
 .nav-link {
 	font-weight: 600;
 }
+.verified-posts {
+	font-size: 1.3em;
+	font-style: italic;
+	width: 200px;
+	box-sizing: border-box;
+	padding: 10px;
+	text-align: center;
+	background-color: rgb(13, 110, 253);
+	color: white;
+}
+.verified-posts div {
+	font-size: 1.75em;
+	color: rgb(255, 213, 40);
+	font-style: normal;
+}
+.happy-icon {
+	position: relative;
+	top: 5px;
+	color: rgb(255, 213, 40);
+	font-size: 1.3em;
+}
 .marquee {
 	display: inline-block;
 	width: max-content;

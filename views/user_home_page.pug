@@ -3,6 +3,12 @@ extends layout
 block content
     section.container
         h1.user-name  #{user.name}
+        if verifiedPosts !== 0
+            div.verified-posts.card
+                span Verified leads 
+                    span.material-icons-outlined.happy-icon sentiment_very_satisfied
+                div= verifiedPosts
+            br
         if currentUser
             div.contact-group.card
                 div.card-body
