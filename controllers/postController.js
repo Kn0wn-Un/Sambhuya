@@ -75,57 +75,59 @@ exports.postFormPost = [
 						helpType: results.helpType,
 						errors: errors.array(),
 					});
-					return;
 				}
 			);
+			return;
 		}
 		//check if phone already exists
-		Post.findOne({ phone: req.body.phone }).exec(function (err, post) {
-			if (err) return next(err);
-			else if (post !== null) {
-				async.parallel(
-					{
-						locations: function (callback) {
-							Location.find({})
-								.sort({ cityName: 1 })
-								.exec(callback);
+		else {
+			Post.findOne({ phone: req.body.phone }).exec(function (err, post) {
+				if (err) return next(err);
+				else if (post !== null) {
+					async.parallel(
+						{
+							locations: function (callback) {
+								Location.find({})
+									.sort({ cityName: 1 })
+									.exec(callback);
+							},
+							helpType: function (callback) {
+								HelpType.find({}).exec(callback);
+							},
 						},
-						helpType: function (callback) {
-							HelpType.find({}).exec(callback);
-						},
-					},
-					(err, results) => {
-						if (err) return next(err);
-						res.render('post_form', {
-							title: 'New Lead',
-							head: 'New Lead',
-							userid: req.user._id,
-							locations: results.locations,
-							helpType: results.helpType,
-							phoneErr: post.url,
-						});
-					}
-				);
-				return;
-			} else {
-				// Data from form is valid.
-				//Create an Post object with escaped and trimmed data.
-				var post = new Post({
-					phone: req.body.phone,
-					location: req.body.location,
-					helpType: req.body.helptype,
-					description: req.body.description,
-					user: req.user._id,
-				});
-				post.save(function (err) {
-					if (err) {
-						return next(err);
-					}
-					return res.redirect(req.user.url);
-				});
-				return;
-			}
-		});
+						(err, results) => {
+							if (err) return next(err);
+							res.render('post_form', {
+								title: 'New Lead',
+								head: 'New Lead',
+								userid: req.user._id,
+								locations: results.locations,
+								helpType: results.helpType,
+								phoneErr: post.url,
+							});
+						}
+					);
+					return;
+				} else {
+					// Data from form is valid.
+					//Create an Post object with escaped and trimmed data.
+					var post = new Post({
+						phone: req.body.phone,
+						location: req.body.location,
+						helpType: req.body.helptype,
+						description: req.body.description,
+						user: req.user._id,
+					});
+					post.save(function (err) {
+						if (err) {
+							return next(err);
+						}
+						return res.redirect(req.user.url);
+					});
+					return;
+				}
+			});
+		}
 	},
 ];
 
@@ -242,69 +244,70 @@ exports.postFormEditPost = [
 						post: results.post,
 						errors: errors.array(),
 					});
-					return;
 				}
 			);
-		}
-		Post.findOne({ phone: req.body.phone }).exec(function (err, post) {
-			var samePost = false;
-			if (err) return next(err);
-			else if (post !== null) {
-				if (String(req.params.postId) === String(post._id))
-					samePost = true;
-				else {
-					async.parallel(
-						{
-							locations: function (callback) {
-								Location.find({})
-									.sort({ cityName: 1 })
-									.exec(callback);
+			return;
+		} else {
+			Post.findOne({ phone: req.body.phone }).exec(function (err, post) {
+				var samePost = false;
+				if (err) return next(err);
+				else if (post !== null) {
+					if (String(req.params.postId) === String(post._id))
+						samePost = true;
+					else {
+						async.parallel(
+							{
+								locations: function (callback) {
+									Location.find({})
+										.sort({ cityName: 1 })
+										.exec(callback);
+								},
+								helpType: function (callback) {
+									HelpType.find({}).exec(callback);
+								},
 							},
-							helpType: function (callback) {
-								HelpType.find({}).exec(callback);
-							},
-						},
-						(err, results) => {
-							if (err) return next(err);
-							res.render('post_form', {
-								title: 'Edit Lead',
-								head: 'Edit Lead',
-								userid: req.user._id,
-								locations: results.locations,
-								helpType: results.helpType,
-								post: post,
-								phoneErr: post.url,
-							});
+							(err, results) => {
+								if (err) return next(err);
+								res.render('post_form', {
+									title: 'Edit Lead',
+									head: 'Edit Lead',
+									userid: req.user._id,
+									locations: results.locations,
+									helpType: results.helpType,
+									post: post,
+									phoneErr: post.url,
+								});
+							}
+						);
+						return;
+					}
+				}
+				if (post === null || samePost) {
+					// Data from form is valid.
+					//Create an Post object with escaped and trimmed data.
+					var post = new Post({
+						phone: req.body.phone,
+						location: req.body.location,
+						helpType: req.body.helptype,
+						description: req.body.description,
+						user: req.user,
+						_id: req.params.postId,
+					});
+					Post.findByIdAndUpdate(
+						req.params.postId,
+						post,
+						{},
+						function (err, post) {
+							if (err) {
+								return next(err);
+							}
+							res.redirect(req.user.url);
 						}
 					);
 					return;
 				}
-			}
-			if (post === null || samePost) {
-				// Data from form is valid.
-				//Create an Post object with escaped and trimmed data.
-				var post = new Post({
-					phone: req.body.phone,
-					location: req.body.location,
-					helpType: req.body.helptype,
-					description: req.body.description,
-					user: req.user,
-					_id: req.params.postId,
-				});
-				Post.findByIdAndUpdate(
-					req.params.postId,
-					post,
-					{},
-					function (err, post) {
-						if (err) {
-							return next(err);
-						}
-						res.redirect(req.user.url);
-					}
-				);
-				return;
-			}
-		});
+			});
+		}
 	},
 ];
 
