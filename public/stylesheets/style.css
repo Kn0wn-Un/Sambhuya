@@ -58,7 +58,6 @@ body {
 .error-display {
 	margin-top: 10px;
 }
-.contact-group h4,
 .contact-group a {
 	padding: 0 20px;
 }
@@ -320,6 +319,11 @@ footer a {
 	}
 	.nav-link:hover {
 		transform: scale(1);
+	}
+	.verified-posts {
+		width: 200px;
+		height: 85px;
+		padding: 3px;
 	}
 }
 @media screen and (min-width: 1024px) {
