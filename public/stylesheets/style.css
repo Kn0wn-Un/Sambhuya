@@ -73,10 +73,10 @@ body {
 }
 .user-name {
 	padding: 20px 0;
-	font-size: 40px;
+	font-size: 30px;
 }
 .post-heading {
-	font-size: 30px;
+	font-size: 25px;
 }
 .new-post {
 	color: white;
@@ -95,7 +95,12 @@ body {
 	width: 500px;
 }
 .post-details h5 {
+	display: inline-block;
+	color: grey;
 	font-weight: 600;
+}
+.post-details h4 {
+	padding-bottom: 15px;
 }
 .lead-container {
 	padding-bottom: 20px;
@@ -232,14 +237,7 @@ body {
 	font-weight: 600;
 }
 .contact {
-	background-image: linear-gradient(
-		to left,
-		#004bbb,
-		#013eac,
-		#01319e,
-		#01248f,
-		#001781
-	);
+	background-image: linear-gradient(to left, #004bbb, #001781);
 	color: white;
 }
 .contact .profile {
@@ -301,11 +299,15 @@ footer a {
 		font-size: 25px;
 		padding-left: 5px;
 		position: relative;
-		left: 0;
+		left: -40px;
 		top: 0;
 	}
-	.page-logout,
 	.logo {
+		position: relative;
+		left: -20px;
+		top: 0;
+	}
+	.page-logout {
 		display: none;
 	}
 	.nav-logout {

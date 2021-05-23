@@ -8,7 +8,7 @@ exports.homeGet = (req, res, next) => {
 	async.parallel(
 		{
 			locations: function (callback) {
-				Location.find({}).exec(callback);
+				Location.find({}).sort({ cityName: 1 }).exec(callback);
 			},
 			helpType: function (callback) {
 				HelpType.find({}).exec(callback);
@@ -40,7 +40,7 @@ exports.homePost = (req, res, next) => {
 	async.parallel(
 		{
 			locations: function (callback) {
-				Location.find({}).exec(callback);
+				Location.find({}).sort({ cityName: 1 }).exec(callback);
 			},
 			helpType: function (callback) {
 				HelpType.find({}).exec(callback);

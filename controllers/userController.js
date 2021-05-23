@@ -87,8 +87,8 @@ exports.userSignupPost = [
 		.isLength({ min: 1 })
 		.escape()
 		.withMessage('Name must be specified.')
-		.isAlphanumeric()
-		.withMessage('Name has non-alphanumeric characters.'),
+		.custom((value) => !/[0-9]/.test(value))
+		.withMessage('No numbers allowed in username'),
 	body('phone')
 		.trim()
 		.isLength({ min: 10, max: 10 })

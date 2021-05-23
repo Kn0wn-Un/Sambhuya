@@ -4,12 +4,20 @@ block content
     section.container
         if !currentUser
             h3 Hope this website helps you, Stay Safe.
-            h4
-                a(href='/login') Login 
-                | or 
-                a(href='/sign-up') Sign Up 
+            br
+            div 
+                em Already a volunteer? 
+                    a(href='/login') Login 
+            div 
+                em Want to become a volunteer? 
+                    a(href='/sign-up') Sign Up 
         if currentUser 
             h1.user-name Hello, #{currentUser.name}!
+            h5 Got any new leads?
+            a(href='/post/new-post')
+                button.btn.btn-outline-primary.btn-lg.new-post 
+                    span.material-icons-outlined create
+                    span.create-text Post new lead
     section.container.post-container
         if posts
             h2.post-heading All Leads:

@@ -21,9 +21,9 @@ PostSchema.virtual('url').get(function () {
 });
 
 PostSchema.virtual('postedDay').get(function () {
-	return DateTime.fromJSDate(this.posted).toLocaleString(
-		DateTime.DATETIME_MED
-	);
+	return DateTime.fromJSDate(this.posted)
+		.setZone('Asia/Kolkata')
+		.toLocaleString(DateTime.DATETIME_MED);
 });
 
 module.exports = mongoose.model('Post', PostSchema);

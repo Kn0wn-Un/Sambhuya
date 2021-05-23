@@ -2,47 +2,46 @@ extends layout
 
 block content
     section.container.lead-container
-        h1.user-name Lead,
-            h2.post-heading #{post.helpType.type} in #{post.location.cityName}
-            if post.verified.length !== 0
-                div.verified
-                    span.material-icons-outlined verified
-                    span.verified-txt Verified, by #{post.verified.length} volunteers
-            section.card.post-details
-                div.card-body
-                    h5 
-                        em Phone Number: 
-                    h4 #{post.phone}
-                    h5
-                        em Location: 
-                    h4 #{post.location.cityName}
-                    h5 
-                        em Help Type: 
-                    h4 #{post.helpType.type}
-                    if post.description
-                    h5  
-                        em Description: 
-                    h4 #{post.description}
-                    div.posted-by Posted by 
-                        a(href=post.user.url) #{post.user.name} 
-                        | on #{post.postedDay}
-                    if !post.isAuthor
-                        if currentUser
-                            div.verify-div
-                                if hasVerified 
-                                    span.thanks Lead verified, Thank You for your support!
-                                    span.material-icons-outlined.verify-icon.thanks-icon volunteer_activism
-                                else
-                                    span Is this a valid lead?
-                                    a(href="/post/verify/"+post._id+"/"+currentUser._id)
-                                        span.material-icons-outlined.verify-icon task
-                                        span Verify lead
+        h2.post-heading #{post.helpType.type} in #{post.location.cityName}
+        if post.verified.length !== 0
+            div.verified
+                span.material-icons-outlined verified
+                span.verified-txt Verified, by #{post.verified.length} volunteers
+        section.card.post-details
+            div.card-body
+                h5 
+                    em Phone Number: 
+                h4 #{post.phone}
+                h5
+                    em Location: 
+                h4 #{post.location.cityName}
+                h5 
+                    em Help Type: 
+                h4 #{post.helpType.type}
+                if post.description
+                h5  
+                    em Description: 
+                h4 #{post.description}
+                div.posted-by Posted by 
+                    a(href=post.user.url) #{post.user.name} 
+                    | on #{post.postedDay}
+                if !post.isAuthor
+                    if currentUser
+                        div.verify-div
+                            if hasVerified 
+                                span.thanks Lead verified, Thank You for your support!
+                                span.material-icons-outlined.verify-icon.thanks-icon volunteer_activism
+                            else
+                                span Is this a valid lead?
+                                a(href="/post/verify/"+post._id+"/"+currentUser._id)
+                                    span.material-icons-outlined.verify-icon task
+                                    span Verify lead
         if post.isAuthor
-            div.lead-buttons
-                a(href='/post/edit/'+post._id) 
-                    button.btn.btn-primary Edit lead 
-                a(href='/post/delete/'+post._id)
-                    button.btn.btn-danger Delete lead
+                div.lead-buttons
+                    a(href='/post/edit/'+post._id) 
+                        button.btn.btn-primary Edit lead 
+                    a(href='/post/delete/'+post._id)
+                        button.btn.btn-danger Delete lead
         input#share(type="text" value=share)
         button.btn.btn-outline-primary#copy-link
             span.material-icons-outlined content_copy

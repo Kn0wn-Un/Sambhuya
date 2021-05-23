@@ -12,7 +12,7 @@ exports.postFormGet = (req, res, next) => {
 	async.parallel(
 		{
 			locations: function (callback) {
-				Location.find({}).exec(callback);
+				Location.find({}).sort({ cityName: 1 }).exec(callback);
 			},
 			helpType: function (callback) {
 				HelpType.find({}).exec(callback);
@@ -59,7 +59,7 @@ exports.postFormPost = [
 			async.parallel(
 				{
 					locations: function (callback) {
-						Location.find({}).exec(callback);
+						Location.find({}).sort({ cityName: 1 }).exec(callback);
 					},
 					helpType: function (callback) {
 						HelpType.find({}).exec(callback);
@@ -86,7 +86,9 @@ exports.postFormPost = [
 				async.parallel(
 					{
 						locations: function (callback) {
-							Location.find({}).exec(callback);
+							Location.find({})
+								.sort({ cityName: 1 })
+								.exec(callback);
 						},
 						helpType: function (callback) {
 							HelpType.find({}).exec(callback);
@@ -163,7 +165,7 @@ exports.postFormEditGet = (req, res, next) => {
 	async.parallel(
 		{
 			locations: function (callback) {
-				Location.find({}).exec(callback);
+				Location.find({}).sort({ cityName: 1 }).exec(callback);
 			},
 			helpType: function (callback) {
 				HelpType.find({}).exec(callback);
@@ -215,7 +217,7 @@ exports.postFormEditPost = [
 			async.parallel(
 				{
 					locations: function (callback) {
-						Location.find({}).exec(callback);
+						Location.find({}).sort({ cityName: 1 }).exec(callback);
 					},
 					helpType: function (callback) {
 						HelpType.find({}).exec(callback);
@@ -254,7 +256,9 @@ exports.postFormEditPost = [
 					async.parallel(
 						{
 							locations: function (callback) {
-								Location.find({}).exec(callback);
+								Location.find({})
+									.sort({ cityName: 1 })
+									.exec(callback);
 							},
 							helpType: function (callback) {
 								HelpType.find({}).exec(callback);

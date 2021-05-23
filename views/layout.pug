@@ -34,10 +34,11 @@ html
                     if currentUser 
                         li.nav-item
                             a.nav-link.active(href='/user') My Profile
-                        li.nav-item
-                            a.nav-link.active.nav-logout(href='/logout') Logout
                     li.nav-item
                         a.nav-link.active(href='/about') About Us
+                    if currentUser 
+                        li.nav-item
+                            a.nav-link.active.nav-logout(href='/logout') Logout
             if currentUser 
                 a(href='/logout')
                     button.btn.btn-danger.page-logout Logout
