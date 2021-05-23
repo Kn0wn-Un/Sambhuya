@@ -124,6 +124,7 @@ exports.postFormPost = [
 						}
 						return res.redirect(req.user.url);
 					});
+					console.log(post.postedDay);
 					return;
 				}
 			});
@@ -140,6 +141,7 @@ exports.postGet = (req, res, next) => {
 		.populate('verified')
 		.exec((err, post) => {
 			if (err) return next(err);
+			if (post === null) return res.redirect('/');
 			post.isAuthor = req.user
 				? String(req.user._id) === String(post.user._id)
 					? true
