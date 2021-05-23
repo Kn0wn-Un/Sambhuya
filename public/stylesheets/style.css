@@ -232,7 +232,14 @@ body {
 	font-weight: 600;
 }
 .contact {
-	background-color: rgb(14, 42, 90);
+	background-image: linear-gradient(
+		to left,
+		#004bbb,
+		#013eac,
+		#01319e,
+		#01248f,
+		#001781
+	);
 	color: white;
 }
 .contact .profile {
@@ -247,6 +254,7 @@ body {
 	font-size: 24px;
 	font-style: italic;
 	padding: 10px 15px;
+	color: rgb(220, 220, 100);
 }
 .contact-icons {
 	padding: 0 20px;
@@ -256,11 +264,17 @@ footer {
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: 600;
 	text-align: center;
+	padding-bottom: 50px;
 }
 footer a {
 	font-size: 1.1rem;
 	text-decoration: none;
 	color: rgb(51, 51, 51);
+}
+.email-id {
+	color: #e5383b;
+	position: relative;
+	top: -3px;
 }
 @keyframes marquee {
 	0% {

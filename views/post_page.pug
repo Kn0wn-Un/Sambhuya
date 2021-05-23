@@ -44,7 +44,8 @@ block content
                 a(href='/post/delete/'+post._id)
                     button.btn.btn-danger Delete lead
         input#share(type="text" value=share)
-        button.btn.btn-outline-primary(onClick="copyLink()")
+        button.btn.btn-outline-primary#copy-link
             span.material-icons-outlined content_copy
             span.copy-text Copy lead link
         span.alert.alert-success.copy-success#toast Link copied!
+    script(src="/javascripts/copyLink.js")

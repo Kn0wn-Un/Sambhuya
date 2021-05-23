@@ -16,3 +16,4 @@ function copyLink() {
 		x.className = x.className.replace('show', '');
 	}, 2000);
 }
+document.getElementById('copy-link').addEventListener('click', copyLink);
