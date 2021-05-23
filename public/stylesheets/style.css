@@ -263,6 +263,7 @@ footer {
 	font-weight: 600;
 	text-align: center;
 	padding-bottom: 50px;
+	visibility: hidden;
 }
 footer a {
 	font-size: 1.1rem;
