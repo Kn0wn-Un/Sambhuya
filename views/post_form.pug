@@ -14,10 +14,10 @@ block content
                 for help in helpType   
                     option(value=help._id selected=(post ? (help.type === post.helpType.type ? true : false) : false))=help.type
             label(for='description') Description
-                if !post
-                    textarea#description(name="description", cols="22", rows="5" placeholder='provide more details here..' maxlength=250)
-                else 
-                    textarea#description(name="description", cols="22", rows="5" placeholder='provide more details here..' maxlength=250)=post.description
+            if !post
+                textarea#description(name="description", cols="22", rows="5" placeholder='provide more details here..' maxlength=250)
+            else 
+                textarea#description(name="description", cols="22", rows="5" placeholder='provide more details here..' maxlength=250)=post.description
             if !post
                 button.btn.btn-primary(type='submit') Post
             else 
