@@ -7,7 +7,7 @@
   <h3 align="center">Sambhuya</h3>
 
   <p align="center">
-    Sambhuya - Through joint effort
+    Through joint effort
     <br />
     <a href="https://github.com/Kn0wn-Un/Sambhuya"><strong>Explore the docs »</strong></a>
     <br />
@@ -25,8 +25,8 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <a href="#process-flow-diagram">Process Flow Diagram</a>
       <ul>
+        <li><a href="#process-flow-diagram">Process Flow Diagram</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -48,7 +48,7 @@
 
 [![Sambhuya][product-screenshot]](https://whispering-bayou-87828.herokuapp.com/)
 
-We are a group of Engineering students from Bengaluru. This project was developed with the aim to address the rapidly increasing need for essential services like beds, oxygen cylinders, etc. We, as budding engineers want to contribute and help the people in need during this grave pandemic.
+This project was developed with the aim to address the rapidly increasing need for essential services like beds, oxygen cylinders, etc. We want to contribute and help the people in need during this grave pandemic.
 
 ## Process Flow Diagram
 
@@ -70,7 +70,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Hardware Requirements
 
-Hardware: Any computer that can run a browser preferably the latest version
+Any computer that can run a browser (preferably the latest version).
 
 ### Software Requirements
 
