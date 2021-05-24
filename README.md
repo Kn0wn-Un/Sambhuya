@@ -118,6 +118,7 @@ Project Link: [https://github.com/Kn0wn-Un/Sambhuya](https://github.com/Kn0wn-Un
 -   [compression](https://www.npmjs.com/package/compression)
 -   [luxon](https://www.npmjs.com/package/luxon)
 -   [Bootstrap Icons](https://icons.getbootstrap.com/)
+-   [Process Flow image courtesy](www.simform.com)
 
 [product-screenshot]: images/screenshot.png
 [process-diagram]: images/processflow.png
