@@ -12,11 +12,9 @@
     <a href="https://github.com/Kn0wn-Un/Sambhuya"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://whispering-bayou-87828.herokuapp.com/">View Demo</a>
+    <a href="https://whispering-bayou-87828.herokuapp.com/" target="_blank">View Demo</a>
     ·
     <a href="https://github.com/Kn0wn-Un/Sambhuya/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/Kn0wn-Un/Sambhuya/issues">Request Feature</a>
   </p>
 </p>
 
@@ -56,7 +54,7 @@ This project was developed with the aim to address the rapidly increasing need f
 
 ### Built With
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+Major frameworks that the project is using.
 
 -   [Node.js](https://nodejs.org/en/)
 -   [Express](https://expressjs.com/)
