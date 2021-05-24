@@ -10,7 +10,7 @@ var PostSchema = new Schema({
 	phone: { type: Number, required: true, min: 10 },
 	location: { type: Schema.Types.ObjectId, ref: Location, required: true },
 	helpType: { type: Schema.Types.ObjectId, ref: HelpType, required: true },
-	posted: { type: Date, default: Date.now() },
+	posted: { type: Date },
 	description: { type: String, maxlength: 250 },
 	user: { type: Schema.Types.ObjectId, ref: 'User' },
 	verified: [{ type: Schema.Types.ObjectId, ref: 'User' }],

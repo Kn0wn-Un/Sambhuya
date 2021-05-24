@@ -115,6 +115,7 @@ exports.postFormPost = [
 						phone: req.body.phone,
 						location: req.body.location,
 						helpType: req.body.helptype,
+						posted: Date.now(),
 						description: req.body.description,
 						user: req.user._id,
 					});
@@ -124,7 +125,6 @@ exports.postFormPost = [
 						}
 						return res.redirect(req.user.url);
 					});
-					console.log(post.postedDay);
 					return;
 				}
 			});
@@ -291,6 +291,7 @@ exports.postFormEditPost = [
 						phone: req.body.phone,
 						location: req.body.location,
 						helpType: req.body.helptype,
+						posted: Date.now(),
 						description: req.body.description,
 						user: req.user,
 						_id: req.params.postId,
