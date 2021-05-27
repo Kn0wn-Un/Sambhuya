@@ -1,7 +1,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Kn0wn-Un/Sambhuya">
-    <img src="images/logo.jpeg" alt="Logo" width="80" height="80">
+    <img src="images/logo.jpeg" alt="Logo">
   </a>
 
   <h3 align="center">Sambhuya</h3>
